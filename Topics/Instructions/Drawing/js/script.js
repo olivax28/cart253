@@ -1,24 +1,44 @@
 /**
- * Title of Project
- * Author Name
+ * Green Vinyl
+ * Olivia Axiuk
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * Displays an image of a mysterious green vinyl...
  */
 
 "use strict";
 
 /**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
+ * Creates square canvas
 */
 function setup() {
-
+    createCanvas(640, 640);
 }
 
 
 /**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
+ * Grey background
 */
 function draw() {
+    background(150);
 
+    // The main part of ther ecord
+
+    push();
+    fill(96, 245, 121)
+    stroke(255, 255, 255)
+    ellipse(320, 320, 480);
+    pop();
+
+    // record label
+    push();
+    fill('white');
+    noStroke();
+    ellipse(320, 320, 140, 140)
+    pop();
+
+    // label hole
+    push();
+    fill("#000000");
+    ellipse(320, 320, 20,)
+    pop();
 }
