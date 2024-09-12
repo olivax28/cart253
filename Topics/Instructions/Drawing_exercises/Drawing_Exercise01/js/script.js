@@ -1,23 +1,22 @@
 /**
- * Title of Project
- * Author Name
+ * Pyramid
+ * Olivia Axiuk
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * A static drawing of a yellow pyramid on a blue sky
  */
 
 "use strict";
 
 /**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
+ * sets canvas
 */
 function setup() {
-
+    createCanvas(400, 400)
 }
 
 
 /**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
+ * Draws 
 */
 function draw() {
 
