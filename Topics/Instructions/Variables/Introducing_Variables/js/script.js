@@ -1,24 +1,33 @@
 /**
- * Title of Project
- * Author Name
+ * Introducing Variables
+ * Pippin Barr
  * 
- * HOW EMBARRASSING! I HAVE NO DESCRIPTION OF MY PROJECT!
- * PLEASE REMOVE A GRADE FROM MY WORK IF IT'S GRADED!
+ * Learning what a variable is and what it does
  */
 
 "use strict";
 
 /**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
+ * create canvas
 */
 function setup() {
+    createCanvas(640, 480);
 
 }
 
 
 /**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
+ * Draw circles in the cnter of the canvas
 */
 function draw() {
+    background(0);
+
+    // draw circles
+    push();
+    fill(255, 255, 0);
+    noStroke();
+    ellipse(mouseX, mouseY, 100, 100);
+    pop();
+
 
 }
