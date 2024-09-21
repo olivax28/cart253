@@ -2,7 +2,7 @@
  * Introducing Variables
  * Pippin Barr
  * 
- * Learning what a variable is and what it does
+ * variables experiments
  */
 
 "use strict";
@@ -11,22 +11,24 @@
  * create canvas
 */
 function setup() {
-    createCanvas(640, 480);
+    createCanvas(480, 480);
 
 }
 
 
 /**
- * Draw circles in the cnter of the canvas
+ * Draws a hole in cheese
 */
 function draw() {
-    background(0);
 
-    // draw circles
+    // the cheese
+    background(255, 255, 0)
+
+    // draw hole
     push();
-    fill(255, 255, 0);
+    fill(0);
     noStroke();
-    ellipse(mouseX, mouseY, 100, 100);
+    ellipse(140, 175, 180);
     pop();
 
 
