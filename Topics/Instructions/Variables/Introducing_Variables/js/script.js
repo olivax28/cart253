@@ -1,11 +1,22 @@
 /**
  * Introducing Variables
- * Pippin Barr
+ * Olivia Axiuk
  * 
  * variables experiments
  */
 
 "use strict";
+
+let cheeseRed = 255;
+let cheeseGreen = 255;
+let cheeseBlue = 0;
+
+
+let holeShade = 0;
+let holeSize = 120;
+let holeX = 140;
+let holeY = 175;
+
 
 /**
  * create canvas
@@ -22,13 +33,13 @@ function setup() {
 function draw() {
 
     // the cheese
-    background(255, 255, 0)
+    background(cheeseRed, cheeseGreen, cheeseBlue);
 
     // draw hole
     push();
-    fill(0);
+    fill(holeShade);
     noStroke();
-    ellipse(140, 175, 180);
+    ellipse(holeX, holeY, holeSize);
     pop();
 
 
