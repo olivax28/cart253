@@ -17,7 +17,7 @@ const hole = {
     size: 10,
     // Maximum size
     maxSize: 200,
-    // How much it grows per frame
+    // How much it grows per frame 
     growthRate: 1
 };
 
