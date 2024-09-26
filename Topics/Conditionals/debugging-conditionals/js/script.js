@@ -81,7 +81,7 @@ function checkMouse() {
             // Check if the mouse is pressed over the bug
             // (Not perfect since it would be better if the click happed right then
             // but this will do)
-            if (mouseOverBug || mouseIsPressed {
+            if (mouseOverBug || mouseIsPressed) {
                 // Splat!
                 bug.alive = false;
                 bug.fill = bug.fills.dead;
