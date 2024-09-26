@@ -68,6 +68,7 @@ function checkEatingFood(){
     if (mouseIsOverlapping) {
         goldfish.color.g -= 1
     }
+    // NOTE TO SELF CONSTRAIN GREEN
 }
 
 // draws the goldfish which follows the mouse
