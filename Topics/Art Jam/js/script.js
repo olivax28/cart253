@@ -15,13 +15,17 @@ let goldfish = {
         g: 165,
         b: 0,
         minG: 0,
-        maxG: 255
+        maxG: 255,
+        deadFill: "grey"
     },
     shape: {
         x: undefined,
         y: undefined,
         size: 30
     },
+    alive: true,
+    weight: 0,
+    weigthThreshold: 255
 
 }
 // descriptors of the fish food
@@ -32,7 +36,9 @@ let fishFood = {
         y: 200,
         size: 30
     },
-}
+};
+
+
 
 /**
  * 
@@ -41,7 +47,9 @@ function setup() {
     createCanvas(640, 400);
     noCursor();
 
-}
+};
+
+
 
 
 
@@ -54,13 +62,23 @@ function draw() {
     checkEatingFood();
     drawFishFood();
     drawGoldfish();
-}
+};
 
+// checks if the goldfish is dead
+function checkInput() {
+    if (!goldfish.alive) {
+        return;
+    }
+
+
+};
+
+// Goldfish follows the mouse
 function moveGoldfish() {
     goldfish.shape.x = mouseX;
     goldfish.shape.y = mouseY;
-}
-
+};
+// checks to see if the fish is eating the food
 function checkEatingFood() {
     //distance between mouse which fish follows and food
     const distance = dist(goldfish.shape.x, goldfish.shape.y, fishFood.shape.x, fishFood.shape.y);
@@ -68,9 +86,13 @@ function checkEatingFood() {
     const mouseIsOverlapping = (distance < fishFood.shape.size / 2);
     // check if the mouse which controls the fish has touched the food
     if (mouseIsOverlapping) {
-        goldfish.color.g -= 1
+        goldfish.color.g -= 1, goldfish.weight += 1;
     }
-}
+    if (goldfish.weight > goldfish.weightThreshold) {
+        goldfish.alive = false;
+        goldfish.color = goldfish.color.deadFill;
+    }
+};
 
 // draws the fish food
 function drawFishFood() {
@@ -79,7 +101,7 @@ function drawFishFood() {
     noStroke();
     ellipse(fishFood.shape.x, fishFood.shape.y, fishFood.shape.size);
     pop();
-}
+};
 
 // draws the goldfish which follows the mouse
 function drawGoldfish() {
@@ -99,4 +121,4 @@ function drawGoldfish() {
     triangle(goldfish.shape.x + goldfish.shape.size / 2, goldfish.shape.y + goldfish.shape.size / 2, goldfish.shape.x + goldfish.shape.size / 2, goldfish.shape.y + goldfish.shape.size / -0.7, goldfish.shape.x + goldfish.shape.size / -2, goldfish.shape.y + goldfish.shape.size / -2);
     pop();
     goldfish.color.g = constrain(goldfish.color.g, goldfish.color.minG, goldfish.color.maxG)
-}
+};
