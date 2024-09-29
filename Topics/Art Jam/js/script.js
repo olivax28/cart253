@@ -25,7 +25,7 @@ let goldfish = {
     },
     alive: true,
     weight: 0,
-    weigthThreshold: 255
+    weightThreshold: 255
 
 }
 // descriptors of the fish food
@@ -40,9 +40,7 @@ let fishFood = {
 
 
 
-/**
- * 
-*/
+// sets up the canvas and makes user's cursor not show when controlling the fish
 function setup() {
     createCanvas(640, 400);
     noCursor();
@@ -87,12 +85,18 @@ function checkEatingFood() {
     // check if the mouse which controls the fish has touched the food
     if (mouseIsOverlapping) {
         goldfish.color.g -= 1, goldfish.weight += 1;
+        console.log(goldfish.color.g, goldfish.weight)
     }
     if (goldfish.weight > goldfish.weightThreshold) {
         goldfish.alive = false;
         goldfish.color = goldfish.color.deadFill;
     }
-};
+}
+
+
+
+
+
 
 // draws the fish food
 function drawFishFood() {
@@ -118,7 +122,7 @@ function drawGoldfish() {
     // tail
     push();
     fill(goldfish.color.r, goldfish.color.g, goldfish.color.b);
-    triangle(goldfish.shape.x + goldfish.shape.size / 2, goldfish.shape.y + goldfish.shape.size / 2, goldfish.shape.x + goldfish.shape.size / 2, goldfish.shape.y + goldfish.shape.size / -0.7, goldfish.shape.x + goldfish.shape.size / -2, goldfish.shape.y + goldfish.shape.size / -2);
+    triangle(goldfish.x - goldfish.size / 2, goldfish.shape.y, goldfish.shape.x - goldfish.shape.size, goldfish.shape.y - goldfish.shape.size / 2, goldfish.shape.x - goldfish.shape.size, goldfish.shape.y + goldfish.shape.size / 2);
     pop();
     goldfish.color.g = constrain(goldfish.color.g, goldfish.color.minG, goldfish.color.maxG)
 };
