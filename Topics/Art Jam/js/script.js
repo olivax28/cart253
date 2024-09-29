@@ -34,7 +34,7 @@ let fishFood = {
     shape: {
         x: 400,
         y: 5,
-        size: 30
+        size: 25
     },
     velocity: {
         x: 0,
@@ -89,7 +89,7 @@ function checkEatingFood() {
     const mouseIsOverlapping = (distance < fishFood.shape.size / 2);
     // check if the mouse which controls the fish has touched the food
     if (mouseIsOverlapping) {
-        goldfish.color.g -= 1, goldfish.weight += 1;
+        goldfish.color.g -= 1.5, goldfish.weight += 2, goldfish.shape.size += 1
     }
     if (goldfish.weight > goldfish.weightThreshold) {
         goldfish.alive = false;
@@ -129,15 +129,21 @@ function drawOrnaments() {
 
 }
 
-// draws the fish food
+// draws fish food that falls from the top then stops on the ground
 function drawFishFood() {
+    // fish food piece one
     push();
     fill(fishFood.color);
     noStroke();
     ellipse(fishFood.shape.x, fishFood.shape.y, fishFood.shape.size);
     pop();
     // moves fish food, makes it fall
-    fishFood.shape.x += fishFood.velocity.x, fishFood.shape.y += fishFood.velocity.y
+    fishFood.shape.y += fishFood.velocity.y
+    console.log(fishFood.shape.y)
+    //fishFood.shape.y = constrain(-300)
+    if (fishFood.shape.y > 325) {
+        fishFood.velocity.y = 0
+    }
 };
 
 // draws the goldfish which follows the mouse
