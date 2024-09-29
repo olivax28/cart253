@@ -58,6 +58,7 @@ function draw() {
     background(173, 216, 230);
     moveGoldfish();
     checkEatingFood();
+    drawOrnaments();
     drawFishFood();
     drawGoldfish();
 };
@@ -85,7 +86,6 @@ function checkEatingFood() {
     // check if the mouse which controls the fish has touched the food
     if (mouseIsOverlapping) {
         goldfish.color.g -= 1, goldfish.weight += 1;
-        console.log(goldfish.color.g, goldfish.weight)
     }
     if (goldfish.weight > goldfish.weightThreshold) {
         goldfish.alive = false;
@@ -94,9 +94,36 @@ function checkEatingFood() {
 }
 
 
+// draws the  background elements
+function drawOrnaments() {
+    // sand
+    push();
+    fill("#E5B88B")
+    noStroke();
+    rect(0, 320, 650, 100)
+    pop();
+    // Green plants (fromt left to right)
+    // plant 01
+    push();
+    fill("#1E7A33")
+    noStroke();
+    rect(20, 100, 25, 250)
+    pop();
+    // plant 02
+    push();
+    fill("#1E7A33")
+    noStroke();
+    rect(85, 120, 25, 225)
+    pop();
+    // plant 03
+    push();
+    fill("#1E7A33")
+    noStroke();
+    rect(500, 120, 25, 225)
+    pop();
 
 
-
+}
 
 // draws the fish food
 function drawFishFood() {
