@@ -32,10 +32,14 @@ let goldfish = {
 let fishFood = {
     color: "#A52A2A",
     shape: {
-        x: 320,
-        y: 200,
+        x: 400,
+        y: 5,
         size: 30
     },
+    velocity: {
+        x: 0,
+        y: 1
+    }
 };
 
 
@@ -132,6 +136,8 @@ function drawFishFood() {
     noStroke();
     ellipse(fishFood.shape.x, fishFood.shape.y, fishFood.shape.size);
     pop();
+    // moves fish food, makes it fall
+    fishFood.shape.x += fishFood.velocity.x, fishFood.shape.y += fishFood.velocity.y
 };
 
 // draws the goldfish which follows the mouse
