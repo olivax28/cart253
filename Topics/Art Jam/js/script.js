@@ -142,11 +142,23 @@ function drawOrnaments() {
     noStroke();
     rect(85, 120, 25, 225)
     pop();
+    // branch
+    push();
+    fill("#1E7A33")
+    noStroke();
+    rect(85, 150, 70, 20)
+    pop();
     // plant 03
     push();
     fill("#1E7A33")
     noStroke();
     rect(500, 120, 25, 225)
+    pop();
+    // rock
+    push();
+    fill("#877B7A")
+    noStroke();
+    rect(300, 350, 40, 30)
     pop();
 
 
