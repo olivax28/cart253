@@ -17,6 +17,7 @@ let goldfish = {
         b: 0,
         minG: 0,
         maxG: 255,
+        // color on death
         deadFill: {
             r: 200,
             g: 200,
@@ -28,11 +29,13 @@ let goldfish = {
         y: undefined,
         size: 30
     },
+    // is the fish alive?
     alive: true,
+    // tracks how much food it eats and the threshgold at which is dies by eating too much
     weight: 0,
     weightThreshold: 300
-
 }
+
 // descriptors of the fish food
 let fishFood = {
     color: "#A52A2A",
@@ -56,16 +59,10 @@ function setup() {
 
 };
 
+// draws the pale water of the aquarium and the fish
 
-
-
-
-/**
- * draws the pale water of the aquarium and the fish
-*/
 function draw() {
     background(173, 216, 230);
-    checkInput()
     moveGoldfish();
     checkEatingFood();
     drawOrnaments();
@@ -74,20 +71,24 @@ function draw() {
     MapBgColor();
 };
 
-// checks if the goldfish is dead
-function checkInput() {
-    if (!goldfish.alive) {
-        return;
-    }
-};
+
+
+
 
 // Goldfish follows the mouse
 function moveGoldfish() {
+    // checks fi creature is dead and stops ability for user to move it
+    if (!goldfish.alive) {
+        return;
+    }
     goldfish.shape.x = mouseX;
     goldfish.shape.y = mouseY;
 };
 // checks to see if the fish is eating the food
 function checkEatingFood() {
+    if (!goldfish.alive) {
+        return;
+    }
     //distance between mouse which fish follows and food
     const distance = dist(goldfish.shape.x, goldfish.shape.y, fishFood.shape.x, fishFood.shape.y);
     // if mouse overlaps the food
@@ -96,13 +97,18 @@ function checkEatingFood() {
     const mouseIsMoving = (movedX !== 0 || movedY !== 0); // example code taken from Creature Loves Massage by Pippin Barr
     // check if the mouse which controls the fish has touched the food and is eating
     if (fishandFoodOverlapping && mouseIsMoving) {
-        goldfish.color.g -= 1.5, goldfish.weight += 2, goldfish.shape.size += 1
+        goldfish.color.g -= 1.5;
+        goldfish.weight += 2;
+        goldfish.shape.size += 1;
     }
     if (goldfish.weight > goldfish.weightThreshold) {
+        // checks if fish died
         goldfish.alive = false;
-        goldfish.color.r = goldfish.color.deadFill.r,
-            goldfish.color.g = goldfish.color.deadFill.g,
-            goldfish.color.b = goldfish.color.deadFill.b;
+        // changes color to deadFill
+        goldfish.color.r = goldfish.color.deadFill.r;
+        goldfish.color.g = goldfish.color.deadFill.g;
+        goldfish.color.b = goldfish.color.deadFill.b;
+
 
     }
 }
