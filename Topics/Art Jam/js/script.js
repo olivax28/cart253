@@ -17,7 +17,11 @@ let goldfish = {
         b: 0,
         minG: 0,
         maxG: 255,
-        deadFill: "grey"
+        deadFill: {
+            r: 200,
+            g: 200,
+            b: 200
+        }
     },
     shape: {
         x: undefined,
@@ -61,6 +65,7 @@ function setup() {
 */
 function draw() {
     background(173, 216, 230);
+    checkInput()
     moveGoldfish();
     checkEatingFood();
     drawOrnaments();
@@ -74,8 +79,6 @@ function checkInput() {
     if (!goldfish.alive) {
         return;
     }
-
-
 };
 
 // Goldfish follows the mouse
@@ -97,7 +100,10 @@ function checkEatingFood() {
     }
     if (goldfish.weight > goldfish.weightThreshold) {
         goldfish.alive = false;
-        goldfish.color = goldfish.color.deadFill;
+        goldfish.color.r = goldfish.color.deadFill.r,
+            goldfish.color.g = goldfish.color.deadFill.g,
+            goldfish.color.b = goldfish.color.deadFill.b;
+
     }
 }
 
