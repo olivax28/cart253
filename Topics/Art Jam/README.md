@@ -1,21 +1,23 @@
-# Template p5 Project
+# Gluttonous Goldfish
 
-Author Name
+Olivia Axiuk
 
 [View this project online](URL_FOR_THE_RUNNING_PROJECT)
 
 ## Description
 
-This description should help the reader understand what the program is, what any controls do, and perhaps what the desired experience it.
+This is a simple program where the user controls a goldfish with a mouse. A fish food pebble drops from the top right corner, landing on the sand. A timer 
+is set up so that the water gets polluted over time by the food, turning pink.
+The user is able to move the goldfish on top of the food pellet, where they mustmove the goldfish in a circular "eating motion."
+
+The goldfish then gets bigger and redder until it eats too much and dies,cutting off input from the mouse and turning grey.
+
+Goldfish are known to eat too much, they're very voracious eaters. Perhaps this one has more of a commentary on the inevitability on death in videogames despite
+the ability to gain coins, points, etc.
 
 ## Credits
-
-This bit should describe what tools were used. For example:
-
 This project uses [p5.js](https://p5js.org).
+Some example code was taken from the lectures (Pippin Barr) as noted in the program
 
 ## Attribution
-
-This bit should attribute any assets or other elements used taken from other sources. For example:
-
-The fish images were sourced from the [Creative Commons image "Georgia Aquarium Fish"](https://search.creativecommons.org/photos/96f6f770-eac1-488c-8abb-16bee7bcc874) by Mike Johnston which is licensed with CC BY 2.0. To view a copy of this license, visit https://creativecommons.org/licenses/by/2.0/.
+No attribution is necessary for outsourced images.

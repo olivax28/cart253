@@ -184,8 +184,9 @@ function drawGoldfish() {
     pop();
     // tail
     push();
+    noStroke();
     fill(goldfish.color.r, goldfish.color.g, goldfish.color.b);
-    triangle(goldfish.x - goldfish.size / 2, goldfish.shape.y, goldfish.shape.x - goldfish.shape.size, goldfish.shape.y - goldfish.shape.size / 2, goldfish.shape.x - goldfish.shape.size, goldfish.shape.y + goldfish.shape.size / 2);
+    triangle(goldfish.shape.x + 5, goldfish.shape.y, goldfish.shape.x - goldfish.shape.size, goldfish.shape.y - goldfish.shape.size / 2, goldfish.shape.x - goldfish.shape.size, goldfish.shape.y + goldfish.shape.size / 2);
     pop();
     goldfish.color.g = constrain(goldfish.color.g, goldfish.color.minG, goldfish.color.maxG);
 };
