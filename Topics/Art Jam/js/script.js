@@ -4,6 +4,7 @@
  * 
  * A goldfish that really, really, really loves food, so much it gets bigger 
  * and redder until it dies....
+ * Fish gets bigger if the user does an "eating" motion (shakes the mouse) over the food pellet
  */
 
 "use strict";
@@ -25,7 +26,7 @@ let goldfish = {
     },
     alive: true,
     weight: 0,
-    weightThreshold: 255
+    weightThreshold: 300
 
 }
 // descriptors of the fish food
@@ -65,6 +66,7 @@ function draw() {
     drawOrnaments();
     drawFishFood();
     drawGoldfish();
+    MapBgColor();
 };
 
 // checks if the goldfish is dead
@@ -86,9 +88,11 @@ function checkEatingFood() {
     //distance between mouse which fish follows and food
     const distance = dist(goldfish.shape.x, goldfish.shape.y, fishFood.shape.x, fishFood.shape.y);
     // if mouse overlaps the food
-    const mouseIsOverlapping = (distance < fishFood.shape.size / 2);
-    // check if the mouse which controls the fish has touched the food
-    if (mouseIsOverlapping) {
+    const fishandFoodOverlapping = (distance < fishFood.shape.size / 2);
+    // checks if mouse is moving so fish eats
+    const mouseIsMoving = (movedX !== 0 || movedY !== 0); // example code taken from Creature Loves Massage by Pippin Barr
+    // check if the mouse which controls the fish has touched the food and is eating
+    if (fishandFoodOverlapping && mouseIsMoving) {
         goldfish.color.g -= 1.5, goldfish.weight += 2, goldfish.shape.size += 1
     }
     if (goldfish.weight > goldfish.weightThreshold) {
@@ -127,7 +131,7 @@ function drawOrnaments() {
     pop();
 
 
-}
+};
 
 // draws fish food that falls from the top then stops on the ground
 function drawFishFood() {
@@ -139,7 +143,6 @@ function drawFishFood() {
     pop();
     // moves fish food, makes it fall
     fishFood.shape.y += fishFood.velocity.y
-    console.log(fishFood.shape.y)
     //fishFood.shape.y = constrain(-300)
     if (fishFood.shape.y > 325) {
         fishFood.velocity.y = 0
@@ -156,6 +159,8 @@ function drawGoldfish() {
     pop();
     // eye
     push();
+    fill("black")
+    stroke("white")
     ellipse(goldfish.shape.x + goldfish.shape.size / 3, goldfish.shape.y, goldfish.shape.size / 10)
     pop();
     // tail
@@ -165,3 +170,7 @@ function drawGoldfish() {
     pop();
     goldfish.color.g = constrain(goldfish.color.g, goldfish.color.minG, goldfish.color.maxG)
 };
+
+function MapBgColor() {
+
+}
