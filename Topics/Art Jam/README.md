@@ -2,7 +2,11 @@
 
 Olivia Axiuk
 
-[View this project online](URL_FOR_THE_RUNNING_PROJECT)
+Repository link: https://github.com/olivax28/cart253.git
+
+Folder link  https://github.com/olivax28/cart253/tree/db07dd2e26d8d924b5e84e83f9606d2980243a07/Topics
+
+[View this project online] https://olivax28.github.io/cart253/Topics/Art%20Jam/
 
 ## Description
 
