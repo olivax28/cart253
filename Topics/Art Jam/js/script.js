@@ -43,7 +43,7 @@ let goldfish = {
 
 // descriptors of the fish food
 let fishFood = {
-    color: "#A52A2A", // I know it's better to use the same data types for colors throughout the project, in this case I used the # in cases where I knew the color would not change
+    color: "#A52A2A", // I know it's better to use the same data types for colors throughout the project, in this case I used the hex codes in cases where I knew the color would not change
     shape: {
         x: 400,
         y: 5,
@@ -190,8 +190,8 @@ function drawGoldfish() {
     pop();
     // eye
     push();
-    fill("black") //Again, better to use the same color types but I knew these colors wouldn't interact with anything
-    stroke("white")
+    fill("#000000") //Again, better to use the same color types but I knew these colors wouldn't interact with anything
+    stroke("#FFFFFF")
     ellipse(goldfish.shape.x + goldfish.shape.size / 3, goldfish.shape.y, goldfish.shape.size / 10)
     pop();
     // tail
