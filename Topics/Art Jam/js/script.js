@@ -82,7 +82,7 @@ function draw() {
     drawGoldfish();
 };
 
-// Goldfish follows the mouse
+// Makes Goldfish follow the mouse
 function moveGoldfish() {
     // checks if fish is dead and stops ability for user to move it
     if (!goldfish.alive) {
