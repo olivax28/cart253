@@ -4,7 +4,7 @@ Olivia Axiuk
 
 Repository link: https://github.com/olivax28/cart253.git
 
-Folder link  https://github.com/olivax28/cart253/tree/db07dd2e26d8d924b5e84e83f9606d2980243a07/Topics
+Folder link  https://github.com/olivax28/cart253/tree/9b4e0bd67078417fe71f96d0de77ae9250721982/Topics/Art%20Jam
 
 [View this project online] https://olivax28.github.io/cart253/Topics/Art%20Jam/
 
