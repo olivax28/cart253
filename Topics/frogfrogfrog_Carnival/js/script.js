@@ -106,7 +106,7 @@ function title() {
 
 
 function game() {
-    background("#87ceeb");
+    background("#45125b");
     moveFly();
     drawFly();
     drawBigFly();
@@ -137,20 +137,23 @@ function moveFly() {
 }
 
 /**
- * Draws the flies as a black circles
+ * Draws the flies 
  */
+
+// A yellow circle
 function drawFly() {
     push();
     noStroke();
-    fill("#000000");
+    fill("#ffe137");
     ellipse(fly.x, fly.y, fly.size);
     pop();
 }
 
+//A Blue Circle
 function drawBigFly() {
     push();
     noStroke();
-    fill("#000000");
+    fill("#1619ff");
     ellipse(bigFly.x, bigFly.y, bigFly.size);
     pop();
 }
