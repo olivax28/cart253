@@ -43,6 +43,13 @@ const fly = {
     speed: 3
 };
 
+const bigFly = {
+    x: 0,
+    y: 200, // Will be random
+    size: 15,
+    speed: 1.5
+};
+
 
 
 
@@ -60,6 +67,7 @@ function setup() {
 
     // Give the fly its first random position
     resetFly();
+    resetBigFly();
 }
 
 
@@ -101,6 +109,7 @@ function game() {
     background("#87ceeb");
     moveFly();
     drawFly();
+    drawBigFly();
     moveFrog();
     moveTongue();
     drawFrog();
@@ -119,16 +128,30 @@ function moveFly() {
     if (fly.x > width) {
         resetFly();
     }
+    //Move the Big fly
+    bigFly.x += bigFly.speed;
+    // Handle the fly going off the canvas
+    if (bigFly.x > width) {
+        resetBigFly();
+    }
 }
 
 /**
- * Draws the fly as a black circle
+ * Draws the flies as a black circles
  */
 function drawFly() {
     push();
     noStroke();
     fill("#000000");
     ellipse(fly.x, fly.y, fly.size);
+    pop();
+}
+
+function drawBigFly() {
+    push();
+    noStroke();
+    fill("#000000");
+    ellipse(bigFly.x, bigFly.y, bigFly.size);
     pop();
 }
 
@@ -150,6 +173,12 @@ function drawScore() {
 function resetFly() {
     fly.x = 0;
     fly.y = random(0, 300);
+}
+
+// Resets big fly position
+function resetBigFly() {
+    bigFly.x = 0;
+    bigFly.y = random(0, 300);
 }
 
 /**
@@ -214,18 +243,30 @@ function drawFrog() {
 }
 
 /**
- * Handles the tongue overlapping the fly
+ * Handles the tongue overlapping the flies
  */
 function checkTongueFlyOverlap() {
     // Get distance from tongue to fly
-    const d = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
+    const flyD = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
     // Check if it's an overlap
-    const eaten = (d < frog.tongue.size / 2 + fly.size / 2);
-    if (eaten) {
+    const flyEaten = (flyD < frog.tongue.size / 2 + fly.size / 2);
+    //Check Distance from tongue to Big fly
+    const bigFlyD = dist(frog.tongue.x, frog.tongue.y, bigFly.x, bigFly.y);
+    //Checks if tongue overlaps bigFly
+    const bigFlyEaten = (bigFlyD < frog.tongue.size / 2 + bigFly.size / 2);
+    if (flyEaten) {
         // increase the score
         score = score + 1;
         // Reset the fly
         resetFly();
+        // Bring back the tongue
+        frog.tongue.state = "inbound";
+    }
+    if (bigFlyEaten) {
+        // increase the score
+        score = score + 2;
+        // Reset the fly
+        resetBigFly();
         // Bring back the tongue
         frog.tongue.state = "inbound";
     }
