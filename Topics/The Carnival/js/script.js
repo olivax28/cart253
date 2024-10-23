@@ -1,13 +1,13 @@
 /**
- * Frogfrogfrog
- * Pippin Barr
+ * The Carnival
+ * Olivia Axiuk
  * 
- * A game of catching flies with your frog-tongue
+ * A carnival game, try to win the best prizes and try not to hit the sad clowns, game ends when health bar is low or timer ends.
  * 
  * Instructions:
- * - Move the frog with your mouse
- * - Click to launch the tongue
- * - Catch flies
+ * - Move the gun with your mouse
+ * - Click to launch the spray
+ * - Hit the targets, avoid the sad clowns, happy clownsa re worth more
  * 
  * Made with p5
  * https://p5js.org/
@@ -15,39 +15,54 @@
 
 "use strict";
 
-// Our frog
-const frog = {
-    // The frog's body has a position and size
+// Our gun
+const gun = {
+    // The gun's body has a position and size
     body: {
         x: 320,
         y: 520,
-        size: 150
+        size: 150,
+
     },
-    // The frog's tongue has a position, size, speed, and state
-    tongue: {
+    // The gun's spray has a position, size, speed, and state
+    spray: {
         x: undefined,
         y: 480,
         size: 20,
         speed: 20,
-        // Determines how the tongue moves each frame
+        // Determines how the spray moves each frame
         state: "idle" // State can be: idle, outbound, inbound
-    }
+    },
+    sprite: undefined
 };
 
-// Our fly
+// Our target
 // Has a position, size, and speed of horizontal movement
-const fly = {
+const target = {
     x: 0,
     y: 200, // Will be random
-    size: 10,
+    size: 50,
+    secondSize: 30,
+    centerSize: 15,
     speed: 3
 };
 
-const bigFly = {
+const Bluetarget = {
     x: 0,
     y: 200, // Will be random
-    size: 15,
+    size: 50,
+    secondSize: 30,
+    centerSize: 15,
     speed: 1.5
+};
+
+//draws rgw sad clown
+
+const sadClown = {
+    x: 0,
+    y: 200, // Will be random
+    size: 20,
+    speed: 2
 };
 
 
@@ -57,7 +72,7 @@ const bigFly = {
 let score = 0;
 
 // Text to Display during states
-let titleString = "The Carnaval"
+let titleString = "The Carnival"
 
 //the current state
 let state = "title";
@@ -65,9 +80,10 @@ let state = "title";
 function setup() {
     createCanvas(640, 480);
 
-    // Give the fly its first random position
-    resetFly();
-    resetBigFly();
+    // Give the target its first random position
+    resettarget();
+    resetBluetarget();
+    resetSadClown();
 }
 
 
@@ -107,32 +123,42 @@ function title() {
 
 function game() {
     background("#45125b");
-    moveFly();
-    drawFly();
-    drawBigFly();
-    moveFrog();
-    moveTongue();
-    drawFrog();
-    checkTongueFlyOverlap();
+    moveTargets();
+    drawtarget();
+    drawBluetarget();
+    drawSadClown();
+    movegun();
+    moveSpray();
+    //preload();
+    drawgun();
+    checkSpraytargetOverlap();
     drawScore();
+
 }
 
 /**
- * Moves the fly according to its speed
- * Resets the fly if it gets all the way to the right
+ * Moves the target according to its speed
+ * Resets the target if it gets all the way to the right
  */
-function moveFly() {
-    // Move the fly
-    fly.x += fly.speed;
-    // Handle the fly going off the canvas
-    if (fly.x > width) {
-        resetFly();
+function moveTargets() {
+    // Move the target
+    target.x += target.speed;
+    // Handle the target going off the canvas
+    if (target.x > width) {
+        resettarget();
     }
-    //Move the Big fly
-    bigFly.x += bigFly.speed;
-    // Handle the fly going off the canvas
-    if (bigFly.x > width) {
-        resetBigFly();
+    //Move the Blue target
+    Bluetarget.x += Bluetarget.speed;
+    // Handle the target going off the canvas
+    if (Bluetarget.x > width) {
+        resetBluetarget();
+    }
+    // moves the sad clown
+    sadClown.x += sadClown.speed;
+    // Handle the target going off the canvas
+    if (sadClown.x > width) {
+        resetSadClown();
+
     }
 }
 
@@ -140,21 +166,50 @@ function moveFly() {
  * Draws the flies 
  */
 
-// A yellow circle
-function drawFly() {
+// A red and white target
+function drawtarget() {
     push();
     noStroke();
-    fill("#ffe137");
-    ellipse(fly.x, fly.y, fly.size);
+    fill("#cb0000");
+    ellipse(target.x, target.y, target.size);
+    pop();
+    push();
+    noStroke();
+    fill("#FFFFFF");
+    ellipse(target.x, target.y, target.secondSize);
+    pop();
+    push();
+    noStroke();
+    fill("#cb0000");
+    ellipse(target.x, target.y, target.centerSize);
     pop();
 }
 
-//A Blue Circle
-function drawBigFly() {
+//A Blue and White target
+function drawBluetarget() {
     push();
     noStroke();
-    fill("#1619ff");
-    ellipse(bigFly.x, bigFly.y, bigFly.size);
+    fill("#002eff");
+    ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.size);
+    pop();
+    push();
+    noStroke();
+    fill("#FFFFFF");
+    ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.secondSize);
+    pop();
+    push();
+    noStroke();
+    fill("#002eff");
+    ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.centerSize);
+    pop();
+}
+
+//A black and white frowning clown
+function drawSadClown() {
+    push();
+    noStroke();
+    fill("#000000");
+    ellipse(sadClown.x, sadClown.y, sadClown.size);
     pop();
 }
 
@@ -162,8 +217,8 @@ function drawBigFly() {
 function drawScore() {
     push();
     textAlign(RIGHT, TOP);
-    textSize(128);
-    fill("pink");
+    textSize(100);
+    fill("#f5ede3");
     text(score, width, 0);
     pop();
 
@@ -171,116 +226,127 @@ function drawScore() {
 }
 
 /**
- * Resets the fly to the left with a random y
+ * Resets the target to the left with a random y
  */
-function resetFly() {
-    fly.x = 0;
-    fly.y = random(0, 300);
+function resettarget() {
+    target.x = 0;
+    target.y = random(0, 300);
 }
 
-// Resets big fly position
-function resetBigFly() {
-    bigFly.x = 0;
-    bigFly.y = random(0, 300);
+// Resets Blue target position
+function resetBluetarget() {
+    Bluetarget.x = 0;
+    Bluetarget.y = random(0, 300);
+}
+
+function resetSadClown() {
+    sadClown.x = 0;
+    sadClown.y = random(0, 300);
 }
 
 /**
- * Moves the frog to the mouse position on x
+ * Moves the gun to the mouse position on x
  */
-function moveFrog() {
-    frog.body.x = mouseX;
+function movegun() {
+    gun.body.x = mouseX;
 }
 
 /**
- * Handles moving the tongue based on its state
+ * Handles moving the spray based on its state
  */
-function moveTongue() {
-    // Tongue matches the frog's x
-    frog.tongue.x = frog.body.x;
-    // If the tongue is idle, it doesn't do anything
-    if (frog.tongue.state === "idle") {
+function moveSpray() {
+    // spray matches the gun's x
+    gun.spray.x = gun.body.x;
+    // If the spray is idle, it doesn't do anything
+    if (gun.spray.state === "idle") {
         // Do nothing
     }
-    // If the tongue is outbound, it moves up
-    else if (frog.tongue.state === "outbound") {
-        frog.tongue.y += -frog.tongue.speed;
-        // The tongue bounces back if it hits the top
-        if (frog.tongue.y <= 0) {
-            frog.tongue.state = "inbound";
+    // If the spray is outbound, it moves up
+    else if (gun.spray.state === "outbound") {
+        gun.spray.y += -gun.spray.speed;
+        // The spray bounces back if it hits the top
+        if (gun.spray.y <= 0) {
+            gun.spray.state = "inbound";
         }
     }
-    // If the tongue is inbound, it moves down
-    else if (frog.tongue.state === "inbound") {
-        frog.tongue.y += frog.tongue.speed;
-        // The tongue stops if it hits the bottom
-        if (frog.tongue.y >= height) {
-            frog.tongue.state = "idle";
+    // If the spray is inbound, it moves down
+    else if (gun.spray.state === "inbound") {
+        gun.spray.y += gun.spray.speed;
+        // The spray stops if it hits the bottom
+        if (gun.spray.y >= height) {
+            gun.spray.state = "idle";
         }
     }
 }
 
+
+/**function preload() {
+* gunSprite = loadImage("assets/images/player_gun.PNG")
+*}
+*/
+
 /**
- * Displays the tongue (tip and line connection) and the frog (body)
+ * Displays the spray (tip and line connection) and the gun (body)
  */
-function drawFrog() {
-    // Draw the tongue tip
+function drawgun() {
+    // Draw the spray tip
     push();
-    fill("#ff0000");
+    fill("#93f2ff");
     noStroke();
-    ellipse(frog.tongue.x, frog.tongue.y, frog.tongue.size);
+    ellipse(gun.spray.x, gun.spray.y, gun.spray.size);
     pop();
 
-    // Draw the rest of the tongue
+    // Draw the rest of the spray
     push();
-    stroke("#ff0000");
-    strokeWeight(frog.tongue.size);
-    line(frog.tongue.x, frog.tongue.y, frog.body.x, frog.body.y);
+    stroke("#61b0ff");
+    strokeWeight(gun.spray.size);
+    line(gun.spray.x, gun.spray.y, gun.body.x, gun.body.y);
     pop();
 
-    // Draw the frog's body
+    // Draw the gun's body
     push();
-    fill("#00ff00");
-    noStroke();
-    ellipse(frog.body.x, frog.body.y, frog.body.size);
+    // ImageMode(CENTER);
+    //image(gunSprite, gun.body.x, gun.body.y);
+    ellipse(gun.body.x, gun.body.y, gun.body.size);
     pop();
 }
 
 /**
- * Handles the tongue overlapping the flies
+ * Handles the spray overlapping the flies
  */
-function checkTongueFlyOverlap() {
-    // Get distance from tongue to fly
-    const flyD = dist(frog.tongue.x, frog.tongue.y, fly.x, fly.y);
+function checkSpraytargetOverlap() {
+    // Get distance from spray to target
+    const targetD = dist(gun.spray.x, gun.spray.y, target.x, target.y);
     // Check if it's an overlap
-    const flyEaten = (flyD < frog.tongue.size / 2 + fly.size / 2);
-    //Check Distance from tongue to Big fly
-    const bigFlyD = dist(frog.tongue.x, frog.tongue.y, bigFly.x, bigFly.y);
-    //Checks if tongue overlaps bigFly
-    const bigFlyEaten = (bigFlyD < frog.tongue.size / 2 + bigFly.size / 2);
-    if (flyEaten) {
+    const targetEaten = (targetD < gun.spray.size / 2 + target.size / 2);
+    //Check Distance from spray to Blue target
+    const BluetargetD = dist(gun.spray.x, gun.spray.y, Bluetarget.x, Bluetarget.y);
+    //Checks if spray overlaps Bluetarget
+    const BluetargetEaten = (BluetargetD < gun.spray.size / 2 + Bluetarget.size / 2);
+    if (targetEaten) {
         // increase the score
         score = score + 1;
-        // Reset the fly
-        resetFly();
-        // Bring back the tongue
-        frog.tongue.state = "inbound";
+        // Reset the target
+        resettarget();
+        // Bring back the spray
+        gun.spray.state = "inbound";
     }
-    if (bigFlyEaten) {
+    if (BluetargetEaten) {
         // increase the score
         score = score + 2;
-        // Reset the fly
-        resetBigFly();
-        // Bring back the tongue
-        frog.tongue.state = "inbound";
+        // Reset the target
+        resetBluetarget();
+        // Bring back the spray
+        gun.spray.state = "inbound";
     }
 }
 
 /**
- * Launch the tongue on click (if it's not launched yet)
+ * Launch the spray on click (if it's not launched yet)
  */
 function mousePressed() {
-    if (frog.tongue.state === "idle") {
-        frog.tongue.state = "outbound";
+    if (gun.spray.state === "idle") {
+        gun.spray.state = "outbound";
     }
 }
 

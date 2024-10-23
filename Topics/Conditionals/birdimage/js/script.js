@@ -52,6 +52,6 @@ function draw() {
     push();
     imageMode(CENTER);
     // Now the CENTER of the bird image will be at (100, 50)
-    image(birdImage, 100, 50);
+    image(birdImage, CENTER, CENTER);
     pop();
 }
