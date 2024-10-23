@@ -66,10 +66,10 @@ const sadClown = {
 };
 
 let healthBar = {
-    x: 630,
-    y: 200,
-    HealthlvlWidth: 50,
-    h: 100,
+    x: 20,
+    y: 5,
+    HealthlvlWidth: 100,
+    h: 30,
     color: "#ff6c6c"
 }
 
@@ -360,11 +360,12 @@ function checkSpraytargetOverlap() {
         // Bring back the spray
         gun.spray.state = "inbound";
     }
+    // removes points and health bar if sad clown is hit
     if (sadClownHit) {
         // increase the score
         score = score - 2;
         // health goes down
-        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 1
+        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 10
         // Reset the target
         resetSadClown();
         // Bring back the spray
