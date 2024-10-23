@@ -44,7 +44,7 @@ const target = {
     size: 50,
     secondSize: 30,
     centerSize: 15,
-    speed: 3
+    speed: 1.5
 };
 
 const Bluetarget = {
@@ -53,7 +53,7 @@ const Bluetarget = {
     size: 50,
     secondSize: 30,
     centerSize: 15,
-    speed: 1.5
+    speed: 3
 };
 
 //draws rgw sad clown
@@ -61,7 +61,7 @@ const Bluetarget = {
 const sadClown = {
     x: 0,
     y: 200, // Will be random
-    size: 20,
+    size: 45,
     speed: 2
 };
 
@@ -318,12 +318,16 @@ function checkSpraytargetOverlap() {
     // Get distance from spray to target
     const targetD = dist(gun.spray.x, gun.spray.y, target.x, target.y);
     // Check if it's an overlap
-    const targetEaten = (targetD < gun.spray.size / 2 + target.size / 2);
+    const targetHit = (targetD < gun.spray.size / 2 + target.size / 2);
     //Check Distance from spray to Blue target
     const BluetargetD = dist(gun.spray.x, gun.spray.y, Bluetarget.x, Bluetarget.y);
     //Checks if spray overlaps Bluetarget
-    const BluetargetEaten = (BluetargetD < gun.spray.size / 2 + Bluetarget.size / 2);
-    if (targetEaten) {
+    const BluetargetHit = (BluetargetD < gun.spray.size / 2 + Bluetarget.size / 2);
+    //Checks distance between spray and sad clown
+    const sadClownD = dist(gun.spray.x, gun.spray.y, sadClown.x, sadClown.y);
+    //Checks if spray overlaps sad clown
+    const sadClownHit = (sadClownD < gun.spray.size / 2 + sadClown.size / 2);
+    if (targetHit) {
         // increase the score
         score = score + 1;
         // Reset the target
@@ -331,11 +335,19 @@ function checkSpraytargetOverlap() {
         // Bring back the spray
         gun.spray.state = "inbound";
     }
-    if (BluetargetEaten) {
+    if (BluetargetHit) {
         // increase the score
         score = score + 2;
         // Reset the target
         resetBluetarget();
+        // Bring back the spray
+        gun.spray.state = "inbound";
+    }
+    if (sadClownHit) {
+        // increase the score
+        score = score - 2;
+        // Reset the target
+        resetSadClown();
         // Bring back the spray
         gun.spray.state = "inbound";
     }
