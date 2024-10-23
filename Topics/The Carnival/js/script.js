@@ -65,6 +65,14 @@ const sadClown = {
     speed: 2
 };
 
+let healthBar = {
+    x: 630,
+    y: 200,
+    HealthlvlWidth: 50,
+    h: 100,
+    color: "#ff6c6c"
+}
+
 
 
 
@@ -133,6 +141,7 @@ function game() {
     drawgun();
     checkSpraytargetOverlap();
     drawScore();
+    drawHealthBar();
 
 }
 
@@ -223,6 +232,14 @@ function drawScore() {
     pop();
 
 
+}
+
+function drawHealthBar() {
+    push();
+    noStroke();
+    rect(healthBar.x, healthBar.y, healthBar.HealthlvlWidth, healthBar.h);
+    fill(healthBar.color);
+    pop();
 }
 
 /**
@@ -346,6 +363,8 @@ function checkSpraytargetOverlap() {
     if (sadClownHit) {
         // increase the score
         score = score - 2;
+        // health goes down
+        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 1
         // Reset the target
         resetSadClown();
         // Bring back the spray
