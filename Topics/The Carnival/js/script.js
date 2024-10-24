@@ -370,14 +370,13 @@ function checkSpraytargetOverlap() {
         score = score - 2;
         // health goes down
         healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 10
-        console.log(healthBar.HealthlvlWidth);
         // Reset the target
         resetSadClown();
         // Bring back the spray
         gun.spray.state = "inbound";
     }
     if (healthBar.HealthlvlWidth - 10 == 0) {
-        state = "gameOverScreen"
+        state = "gameOverScreen";
     }
 }
 
