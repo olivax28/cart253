@@ -20,7 +20,7 @@ const gun = {
     // The gun's body has a position and size
     body: {
         x: 320,
-        y: 400,
+        y: 420,
         //size: 150,
         sprite: undefined,
 
@@ -29,7 +29,7 @@ const gun = {
     spray: {
         x: undefined,
         y: 480,
-        size: 20,
+        size: 12,
         speed: 20,
         // Determines how the spray moves each frame
         state: "idle" // State can be: idle, outbound, inbound
