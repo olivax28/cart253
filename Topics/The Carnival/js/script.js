@@ -70,7 +70,7 @@ let healthBar = {
     y: 5,
     HealthlvlWidth: 100,
     h: 30,
-    color: "#ff6c6c"
+    color: "#ff1b1b"
 }
 
 
@@ -231,7 +231,7 @@ function drawScore() {
     push();
     textAlign(RIGHT, TOP);
     textSize(100);
-    fill("#f5ede3");
+    fill("#ff9300");
     text(score, width, 0);
     pop();
 
@@ -241,8 +241,8 @@ function drawScore() {
 function drawHealthBar() {
     push();
     noStroke();
-    rect(healthBar.x, healthBar.y, healthBar.HealthlvlWidth, healthBar.h);
     fill(healthBar.color);
+    rect(healthBar.x, healthBar.y, healthBar.HealthlvlWidth, healthBar.h);
     pop();
 }
 
