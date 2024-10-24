@@ -20,8 +20,9 @@ const gun = {
     // The gun's body has a position and size
     body: {
         x: 320,
-        y: 520,
-        size: 150,
+        y: 400,
+        //size: 150,
+        sprite: undefined,
 
     },
     // The gun's spray has a position, size, speed, and state
@@ -86,6 +87,10 @@ let gameOverString = "You Died :( Press any key to restart"
 
 //the current state
 let state = "title";
+
+function preload(){
+    gun.body.sprite =loadImage("assets/images/player_gun.PNG")
+}
 
 function setup() {
     createCanvas(640, 480);
@@ -331,9 +336,9 @@ function drawgun() {
 
     // Draw the gun's body
     push();
-    // ImageMode(CENTER);
-    //image(gunSprite, gun.body.x, gun.body.y);
-    ellipse(gun.body.x, gun.body.y, gun.body.size);
+    imageMode(CENTER);
+    image(gun.body.sprite, gun.body.x, gun.body.y);
+    //ellipse(gun.body.x, gun.body.y, gun.body.size);
     pop();
 }
 
