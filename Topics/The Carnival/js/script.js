@@ -78,8 +78,9 @@ let healthBar = {
 
 
 
-// the current score
+// the current score and its minimum for resetting purposes
 let score = 0;
+let scoreMin =0;
 
 // Text to Display during states
 let titleString = "The Carnival"
@@ -275,6 +276,11 @@ function resetSadClown() {
 function resetHealthBar(){
     healthBar.HealthlvlWidth = healthBar.maxWidth;
 }
+
+
+function resetScore(){
+    score = scoreMin;
+}
 /**
  * Moves the gun to the mouse position on x
  */
@@ -414,6 +420,7 @@ function gameOverScreen() {
     if (keyIsPressed) {
         state = "title";
         resetHealthBar();
+        resetScore();
     }
 }
 
