@@ -69,6 +69,7 @@ let healthBar = {
     x: 20,
     y: 5,
     HealthlvlWidth: 100,
+    maxWidth: 100,
     h: 30,
     color: "#ff1b1b"
 }
@@ -176,7 +177,7 @@ function moveTargets() {
 }
 
 /**
- * Draws the flies 
+ * Draws the Different elements, targets (blue,red, hapy clown, sad clown and healthbar) 
  */
 
 // A red and white target
@@ -265,6 +266,10 @@ function resetSadClown() {
     sadClown.y = random(0, 300);
 }
 
+//resets the the healthbar
+function resetHealthBar(){
+    healthBar.HealthlvlWidth = healthBar.maxWidth;
+}
 /**
  * Moves the gun to the mouse position on x
  */
@@ -403,6 +408,7 @@ function gameOverScreen() {
 
     if (keyIsPressed) {
         state = "title";
+        resetHealthBar();
     }
 }
 
