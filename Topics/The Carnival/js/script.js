@@ -34,7 +34,7 @@ const gun = {
         // Determines how the spray moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     },
-    sprite: undefined
+    
 };
 
 // Our target
@@ -81,7 +81,13 @@ let healthBar = {
 // the current score and its minimum for resetting purposes
 let score = 0;
 let scoreMin =0;
+//Timer parameters
+let timer ={
+    counter: 60,
+    max: 60,
+    min: 0,
 
+};
 // Text to Display during states
 let titleString = "The Carnival"
 let gameOverString = "You Died :( Press any key to restart"
@@ -153,6 +159,8 @@ function game() {
     checkSpraytargetOverlap();
     drawScore();
     drawHealthBar();
+    countDown();
+    drawTimer();
 
 }
 
@@ -245,6 +253,17 @@ function drawScore() {
 
 }
 
+function drawTimer() {
+    push();
+    textAlign(LEFT, TOP);
+    textSize(100);
+    fill("#ff9300");
+    text(floor(timer.counter), 0, 0);
+    pop();
+
+
+}
+
 function drawHealthBar() {
     push();
     noStroke();
@@ -277,6 +296,10 @@ function resetHealthBar(){
     healthBar.HealthlvlWidth = healthBar.maxWidth;
 }
 
+function countDown(){
+    timer.counter -= 1/(frameRate());
+}
+
 
 function resetScore(){
     score = scoreMin;
@@ -304,6 +327,7 @@ function moveSpray() {
         // The spray bounces back if it hits the top
         if (gun.spray.y <= 0) {
             gun.spray.state = "inbound";
+            
         }
     }
     // If the spray is inbound, it moves down
@@ -403,6 +427,11 @@ function mousePressed() {
     if (gun.spray.state === "idle") {
         gun.spray.state = "outbound";
     }
+
+}
+
+function mouseReleased(){
+    gun.spray.state = "inbound";
 }
 
 
