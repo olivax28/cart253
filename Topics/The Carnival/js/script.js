@@ -256,9 +256,9 @@ function drawScore() {
 function drawTimer() {
     push();
     textAlign(LEFT, TOP);
-    textSize(100);
-    fill("#ff9300");
-    text(floor(timer.counter), 0, 0);
+    textSize(50);
+    fill("#FFFBC0");
+    text(floor(timer.counter), 5, 50);
     pop();
 
 
@@ -298,6 +298,10 @@ function resetHealthBar(){
 
 function countDown(){
     timer.counter -= 1/(frameRate());
+}
+
+function resetCountDown(){
+    timer.counter = timer.max;
 }
 
 
@@ -450,6 +454,7 @@ function gameOverScreen() {
         state = "title";
         resetHealthBar();
         resetScore();
+        resetCountDown();
     }
 }
 
