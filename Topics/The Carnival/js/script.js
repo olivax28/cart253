@@ -81,6 +81,7 @@ let score = 0;
 
 // Text to Display during states
 let titleString = "The Carnival"
+let gameOverString = "You Died :( Press any key to restart"
 
 //the current state
 let state = "title";
@@ -394,14 +395,14 @@ function gameOverScreen() {
     //sets size and alignment of the Title text 
     textSize(32);
     textAlign(CENTER, CENTER)
-    background("#bb1a1a");
+    background("#321d35");
 
     push();
-    fill("#");
-    text("You Died :(", width / 2, height / 2)
+    fill("#db1c1c");
+    text(gameOverString, width / 2, height / 2)
     pop();
 
-    if (mouseIsPressed) {
+    if (keyIsPressed) {
         state = "title";
     }
 }
