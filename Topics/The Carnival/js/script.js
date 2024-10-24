@@ -105,6 +105,9 @@ function draw() {
         game();
 
     }
+    if (state === "gameOverScreen") {
+        gameOverScreen();
+    }
 }
 
 /**
@@ -366,10 +369,14 @@ function checkSpraytargetOverlap() {
         score = score - 2;
         // health goes down
         healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 10
+        console.log(healthBar.HealthlvlWidth);
         // Reset the target
         resetSadClown();
         // Bring back the spray
         gun.spray.state = "inbound";
+    }
+    if (healthBar.HealthlvlWidth - 10 == 0) {
+        state = "gameOverScreen"
     }
 }
 
@@ -381,4 +388,22 @@ function mousePressed() {
         gun.spray.state = "outbound";
     }
 }
+
+
+function gameOverScreen() {
+    //sets size and alignment of the Title text 
+    textSize(32);
+    textAlign(CENTER, CENTER)
+    background("#bb1a1a");
+
+    push();
+    fill("#");
+    text("You Died :(", width / 2, height / 2)
+    pop();
+
+    if (mouseIsPressed) {
+        state = "title";
+    }
+}
+
 
