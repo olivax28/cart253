@@ -478,7 +478,7 @@ function checkSprayHitElementOverlap() {
     }
 }
 
-
+// determines the prizes, ending screen after countdown
 function calculatePrize() {
     if (countDown == 0 && score >= 10) {
         state = "prize01Screen";
