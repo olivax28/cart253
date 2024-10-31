@@ -90,7 +90,7 @@ let score = 0;
 let scoreMin = 0;
 //Timer parameters
 let timer = {
-    counter: 60,
+    counter: 10,
     max: 60,
     min: 0,
 
@@ -129,6 +129,17 @@ function draw() {
     if (state === "gameOverScreen") {
         gameOverScreen();
     }
+
+    if (state === "prize01Screen") {
+        prize01Screen();
+    }
+
+    if (state === "prize02Screen") {
+        prize02Screen();
+    }
+    if (state === "prize03Screen") {
+        prize03Screen();
+    }
 }
 
 /**
@@ -164,11 +175,12 @@ function game() {
     moveSpray();
     //preload();
     drawgun();
-    checkSpraytargetOverlap();
+    checkSprayHitElementOverlap();
     drawScore();
     drawHealthBar();
     countDown();
     drawTimer();
+    calculatePrize();
 
 }
 
@@ -408,8 +420,8 @@ function drawgun() {
 /**
  * Handles the spray overlapping the flies
  */
-function checkSpraytargetOverlap() {
-    // Get distance from spray to target
+function checkSprayHitElementOverlap() {
+    // Get distance from spray to the hit elements
     const targetD = dist(gun.spray.x, gun.spray.y, target.x, target.y);
     // Check if it's an overlap
     const targetHit = (targetD < gun.spray.size / 2 + target.size / 2);
@@ -466,6 +478,17 @@ function checkSpraytargetOverlap() {
     }
 }
 
+
+function calculatePrize() {
+    if (countDown == 0 && score >= 10) {
+        state = "prize01Screen";
+    }
+    if (countDown == 0 && score <= 20) {
+        state = "prize02Screen";
+    }
+}
+
+
 /**
  * Launch the spray on click (if it's not launched yet)
  */
@@ -490,6 +513,65 @@ function gameOverScreen() {
     push();
     fill("#db1c1c");
     text(gameOverString, width / 2, height / 2)
+    pop();
+
+    if (keyIsPressed) {
+        state = "title";
+        resetHealthBar();
+        resetScore();
+        resetCountDown();
+    }
+}
+
+
+function prize01Screen() {
+    //sets size and alignment of the Title text 
+    textSize(32);
+    textAlign(CENTER, CENTER)
+    background("#321d35");
+
+    push();
+    fill("#db1c1c");
+    text(PRIZE01, width / 2, height / 2)
+    pop();
+
+    if (keyIsPressed) {
+        state = "title";
+        resetHealthBar();
+        resetScore();
+        resetCountDown();
+    }
+}
+
+
+function prize02Screen() {
+    //sets size and alignment of the Title text 
+    textSize(32);
+    textAlign(CENTER, CENTER)
+    background("#321d35");
+
+    push();
+    fill("#db1c1c");
+    text(PRIZE02, width / 2, height / 2)
+    pop();
+
+    if (keyIsPressed) {
+        state = "title";
+        resetHealthBar();
+        resetScore();
+        resetCountDown();
+    }
+}
+
+function prize03Screen() {
+    //sets size and alignment of the Title text 
+    textSize(32);
+    textAlign(CENTER, CENTER)
+    background("#321d35");
+
+    push();
+    fill("#db1c1c");
+    text(PRIZE03, width / 2, height / 2)
     pop();
 
     if (keyIsPressed) {
