@@ -34,7 +34,7 @@ const gun = {
         // Determines how the spray moves each frame
         state: "idle" // State can be: idle, outbound, inbound
     },
-    
+
 };
 
 // Our target
@@ -63,7 +63,14 @@ const sadClown = {
     x: 0,
     y: 200, // Will be random
     size: 45,
-    speed: 2
+    speed: 3
+};
+
+const happyClown = {
+    x: 0,
+    y: 200, // Will be random
+    size: 45,
+    speed: 4
 };
 
 let healthBar = {
@@ -80,9 +87,9 @@ let healthBar = {
 
 // the current score and its minimum for resetting purposes
 let score = 0;
-let scoreMin =0;
+let scoreMin = 0;
 //Timer parameters
-let timer ={
+let timer = {
     counter: 60,
     max: 60,
     min: 0,
@@ -95,8 +102,8 @@ let gameOverString = "You Died :( Press any key to restart"
 //the current state
 let state = "title";
 
-function preload(){
-    gun.body.sprite =loadImage("assets/images/player_gun.PNG")
+function preload() {
+    gun.body.sprite = loadImage("assets/images/player_gun.PNG")
 }
 
 function setup() {
@@ -148,10 +155,11 @@ function title() {
 
 function game() {
     background("#45125b");
-    moveTargets();
+    moveHitItems();
     drawtarget();
     drawBluetarget();
     drawSadClown();
+    drawHappyClown();
     movegun();
     moveSpray();
     //preload();
@@ -168,7 +176,7 @@ function game() {
  * Moves the target according to its speed
  * Resets the target if it gets all the way to the right
  */
-function moveTargets() {
+function moveHitItems() {
     // Move the target
     target.x += target.speed;
     // Handle the target going off the canvas
@@ -186,6 +194,13 @@ function moveTargets() {
     // Handle the target going off the canvas
     if (sadClown.x > width) {
         resetSadClown();
+
+    }
+    // moves the happy clown
+    happyClown.x += happyClown.speed;
+    // Handle the target going off the canvas
+    if (happyClown.x > width) {
+        resetHappyClown();
 
     }
 }
@@ -241,6 +256,14 @@ function drawSadClown() {
     pop();
 }
 
+function drawHappyClown() {
+    push();
+    noStroke();
+    fill("#ff2d00");
+    ellipse(happyClown.x, happyClown.y, happyClown.size);
+    pop();
+}
+
 // displays the score in top right 
 function drawScore() {
     push();
@@ -291,21 +314,27 @@ function resetSadClown() {
     sadClown.y = random(0, 300);
 }
 
+
+function resetHappyClown() {
+    happyClown.x = 0;
+    happyClown.y = random(0, 300);
+}
+
 //resets the the healthbar
-function resetHealthBar(){
+function resetHealthBar() {
     healthBar.HealthlvlWidth = healthBar.maxWidth;
 }
 
-function countDown(){
-    timer.counter -= 1/(frameRate());
+function countDown() {
+    timer.counter -= 1 / (frameRate());
 }
 
-function resetCountDown(){
+function resetCountDown() {
     timer.counter = timer.max;
 }
 
 
-function resetScore(){
+function resetScore() {
     score = scoreMin;
 }
 /**
@@ -331,7 +360,7 @@ function moveSpray() {
         // The spray bounces back if it hits the top
         if (gun.spray.y <= 0) {
             gun.spray.state = "inbound";
-            
+
         }
     }
     // If the spray is inbound, it moves down
@@ -392,6 +421,9 @@ function checkSpraytargetOverlap() {
     const sadClownD = dist(gun.spray.x, gun.spray.y, sadClown.x, sadClown.y);
     //Checks if spray overlaps sad clown
     const sadClownHit = (sadClownD < gun.spray.size / 2 + sadClown.size / 2);
+    const happyClownD = dist(gun.spray.x, gun.spray.y, happyClown.x, happyClown.y);
+    //Checks if spray overlaps happy clown
+    const happyClownHit = (happyClownD < gun.spray.size / 2 + happyClown.size / 2);
     if (targetHit) {
         // increase the score
         score = score + 1;
@@ -411,7 +443,7 @@ function checkSpraytargetOverlap() {
     // removes points and health bar if sad clown is hit
     if (sadClownHit) {
         // increase the score
-        score = score - 2;
+        score = score - 5;
         // health goes down
         healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 10
         // Reset the target
@@ -419,8 +451,18 @@ function checkSpraytargetOverlap() {
         // Bring back the spray
         gun.spray.state = "inbound";
     }
-    if (healthBar.HealthlvlWidth - 10 == 0) {
-        state = "gameOverScreen";
+    if (happyClownHit) {
+        // increase the score
+        score = score + 3;
+        // health goes down
+        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth + 10
+        // Reset the target
+        resetHappyClown();
+        // Bring back the spray
+        gun.spray.state = "inbound";
+        if (healthBar.HealthlvlWidth - 10 == 0) {
+            state = "gameOverScreen";
+        }
     }
 }
 
@@ -434,7 +476,7 @@ function mousePressed() {
 
 }
 
-function mouseReleased(){
+function mouseReleased() {
     gun.spray.state = "inbound";
 }
 
@@ -457,5 +499,3 @@ function gameOverScreen() {
         resetCountDown();
     }
 }
-
-
