@@ -462,6 +462,9 @@ function checkSprayHitElementOverlap() {
         resetSadClown();
         // Bring back the spray
         gun.spray.state = "inbound";
+        if (healthBar.HealthlvlWidth - 10 == 0) {
+            state = "gameOverScreen";
+        }
     }
     if (happyClownHit) {
         // increase the score
@@ -472,9 +475,6 @@ function checkSprayHitElementOverlap() {
         resetHappyClown();
         // Bring back the spray
         gun.spray.state = "inbound";
-        if (healthBar.HealthlvlWidth - 10 == 0) {
-            state = "gameOverScreen";
-        }
     }
 }
 
