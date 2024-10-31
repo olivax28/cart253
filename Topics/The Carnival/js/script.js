@@ -222,7 +222,7 @@ function moveHitItems() {
  */
 
 // A red and white target
-function drawtarget() {
+function drawtarget() { //refactor
     push();
     noStroke();
     fill("#cb0000");
@@ -310,7 +310,7 @@ function drawHealthBar() {
 /**
  * Resets the target to the left with a random y
  */
-function resettarget() {
+function resettarget() { //refactor
     target.x = 0;
     target.y = random(0, 300);
 }
@@ -470,7 +470,7 @@ function checkSprayHitElementOverlap() {
         // increase the score
         score = score + 3;
         // health goes down
-        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth + 10
+        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth + 10;
         // Reset the target
         resetHappyClown();
         // Bring back the spray
@@ -480,10 +480,11 @@ function checkSprayHitElementOverlap() {
 
 // determines the prizes, ending screen after countdown
 function calculatePrize() {
-    if (countDown == 0 && score >= 10) {
+    console.log(floor(timer.counter))
+    if (floor(timer.counter) == 0 && score <= 10) {
         state = "prize01Screen";
     }
-    if (countDown == 0 && score <= 20) {
+    else if (floor(timer.counter) == 0 && score <= 20) {
         state = "prize02Screen";
     }
 }
@@ -515,6 +516,7 @@ function gameOverScreen() {
     text(gameOverString, width / 2, height / 2)
     pop();
 
+    // resets game and brings the player back to title
     if (keyIsPressed) {
         state = "title";
         resetHealthBar();
@@ -532,9 +534,9 @@ function prize01Screen() {
 
     push();
     fill("#db1c1c");
-    text(PRIZE01, width / 2, height / 2)
+    text("PRIZE01", width / 2, height / 2)
     pop();
-
+// resets game and brings the player back to title
     if (keyIsPressed) {
         state = "title";
         resetHealthBar();
@@ -552,7 +554,7 @@ function prize02Screen() {
 
     push();
     fill("#db1c1c");
-    text(PRIZE02, width / 2, height / 2)
+    text("PRIZE02", width / 2, height / 2)
     pop();
 
     if (keyIsPressed) {
