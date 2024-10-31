@@ -63,14 +63,16 @@ const sadClown = {
     x: 0,
     y: 200, // Will be random
     size: 45,
-    speed: 3
+    speed: 3,
+    sprite: undefined
 };
 
 const happyClown = {
     x: 0,
     y: 200, // Will be random
     size: 45,
-    speed: 4
+    speed: 4,
+    sprite: undefined
 };
 
 let healthBar = {
@@ -104,6 +106,7 @@ let state = "title";
 
 function preload() {
     gun.body.sprite = loadImage("assets/images/player_gun.PNG")
+    happyClown.sprite = loadImage("assets/images/clown.png")
 }
 
 function setup() {
@@ -136,9 +139,6 @@ function draw() {
 
     if (state === "prize02Screen") {
         prize02Screen();
-    }
-    if (state === "prize03Screen") {
-        prize03Screen();
     }
 }
 
@@ -273,6 +273,10 @@ function drawHappyClown() {
     noStroke();
     fill("#ff2d00");
     ellipse(happyClown.x, happyClown.y, happyClown.size);
+    pop();
+    push();
+    imageMode(CENTER);
+    image(happyClown.sprite, happyClown.x, happyClown.y);
     pop();
 }
 
@@ -413,7 +417,6 @@ function drawgun() {
     push();
     imageMode(CENTER);
     image(gun.body.sprite, gun.body.x, gun.body.y);
-    //ellipse(gun.body.x, gun.body.y, gun.body.size);
     pop();
 }
 
@@ -484,7 +487,7 @@ function calculatePrize() {
     if (floor(timer.counter) == 0 && score <= 10) {
         state = "prize01Screen";
     }
-    else if (floor(timer.counter) == 0 && score <= 20) {
+    else if (floor(timer.counter) == 0 && score >= 10) {
         state = "prize02Screen";
     }
 }
@@ -555,25 +558,6 @@ function prize02Screen() {
     push();
     fill("#db1c1c");
     text("PRIZE02", width / 2, height / 2)
-    pop();
-
-    if (keyIsPressed) {
-        state = "title";
-        resetHealthBar();
-        resetScore();
-        resetCountDown();
-    }
-}
-
-function prize03Screen() {
-    //sets size and alignment of the Title text 
-    textSize(32);
-    textAlign(CENTER, CENTER)
-    background("#321d35");
-
-    push();
-    fill("#db1c1c");
-    text(PRIZE03, width / 2, height / 2)
     pop();
 
     if (keyIsPressed) {
