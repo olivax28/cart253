@@ -109,9 +109,11 @@ let gameOverString = "You Died :( Press any key to restart"
 //the current state
 let state = "title";
 
+// preloads all the sprites
 function preload() {
     gun.body.sprite = loadImage("assets/images/player_gun.PNG")
-    happyClown.sprite = loadImage("assets/images/clown.png")
+    happyClown.sprite = loadImage("assets/images/happyClown_sprite.PNG")
+    sadClown.sprite = loadImage("assets/images/sadClown_sprite.PNG")
     prizes.clownPrizeSprite = loadImage("assets/images/prize_clown.PNG")
     prizes.bearPrizeSprite = loadImage("assets/images/prize_patchbear.PNG")
 }
@@ -123,6 +125,7 @@ function setup() {
     resettarget();
     resetBluetarget();
     resetSadClown();
+    resetHappyClown();
 }
 
 
@@ -273,15 +276,20 @@ function drawSadClown() {
     fill("#000000");
     ellipse(sadClown.x, sadClown.y, sadClown.size);
     pop();
+    push();
+    imageMode(CENTER);
+    image(sadClown.sprite, sadClown.x, sadClown.y);
+    pop();
 }
 
 //a joyful looking clown (sprite)
 function drawHappyClown() {
     push();
     noStroke();
-    fill("#ff2d00");
+    fill("#000000");
     ellipse(happyClown.x, happyClown.y, happyClown.size);
     pop();
+    // draws the happy clown's sprite
     push();
     imageMode(CENTER);
     image(happyClown.sprite, happyClown.x, happyClown.y);
