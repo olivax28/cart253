@@ -1,13 +1,13 @@
 /**
- * The Carnival
+ * The Carnival Game
  * Olivia Axiuk
  * 
  * A carnival game, try to win the best prizes and try not to hit the sad clowns, game ends when health bar is low or timer ends.
  * 
  * Instructions:
  * - Move the gun with your mouse
- * - Click to launch the spray
- * - Hit the targets, avoid the sad clowns, happy clownsa re worth more
+ * - Click to launch the spray, press and hold for a longer reach
+ * - Hit the targets, avoid the sad clowns, happy clownsa are worth more
  * 
  * Made with p5
  * https://p5js.org/
@@ -103,7 +103,7 @@ let timer = {
 
 };
 // Text to Display during states
-let titleString = "The Carnival"
+let titleString = "The Carnival Game"
 let gameOverString = "You Died :( Press any key to restart"
 
 //the current state
@@ -266,7 +266,7 @@ function drawBluetarget() {
     pop();
 }
 
-//A black and white frowning clown
+//A black and white frowning clown (sprite)
 function drawSadClown() {
     push();
     noStroke();
@@ -275,6 +275,7 @@ function drawSadClown() {
     pop();
 }
 
+//a joyful looking clown (sprite)
 function drawHappyClown() {
     push();
     noStroke();
@@ -299,6 +300,7 @@ function drawScore() {
 
 }
 
+// displays the timer in small numbers on the left
 function drawTimer() {
     push();
     textAlign(LEFT, TOP);
@@ -310,6 +312,7 @@ function drawTimer() {
 
 }
 
+// a red bar that gets shorter as the player hits the sad clowns
 function drawHealthBar() {
     push();
     noStroke();
@@ -348,15 +351,17 @@ function resetHealthBar() {
     healthBar.HealthlvlWidth = healthBar.maxWidth;
 }
 
+// makes the timer count down once per second
+
 function countDown() {
     timer.counter -= 1 / (frameRate());
 }
-
+// resets the countdown
 function resetCountDown() {
     timer.counter = timer.max;
 }
 
-
+// resets the score
 function resetScore() {
     score = scoreMin;
 }
@@ -487,7 +492,6 @@ function checkSprayHitElementOverlap() {
 
 // determines the prizes, ending screen after countdown
 function calculatePrize() {
-    console.log(floor(timer.counter))
     if (floor(timer.counter) == 0 && score <= 10) {
         state = "prize01Screen";
     }
@@ -582,6 +586,7 @@ function prize02Screen() {
     fill("#ffffc7");
     text("Press any key to restart", width / 2, 400)
     pop();
+    // resets the game and brings the player back to the title screen
 
     if (keyIsPressed) {
         state = "title";
