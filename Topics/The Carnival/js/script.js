@@ -548,6 +548,10 @@ function prize01Screen() {
     fill("#ffffc7");
     text("Congrats! You won the Patchwork Teddy!", width / 2, 50)
     pop();
+    push();
+    fill("#ffffc7");
+    text("Press any key to restart", width / 2, 400)
+    pop();
     // resets game and brings the player back to title
     if (keyIsPressed) {
         state = "title";
@@ -571,8 +575,12 @@ function prize02Screen() {
     pop();
     //draws the prize text
     push();
-    fill("#db1c1c");
-    text("PRIZE02", width / 2, height / 2)
+    fill("#ffffc7");
+    text("Congrats! You won the Cuddly Clown!", width / 2, 50)
+    pop();
+    push();
+    fill("#ffffc7");
+    text("Press any key to restart", width / 2, 400)
     pop();
 
     if (keyIsPressed) {
