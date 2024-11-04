@@ -37,6 +37,11 @@ const gun = {
 
 };
 
+const prizes = {
+    clownPrizeSprite: undefined,
+    bearPrizeSprite: undefined
+}
+
 // Our target
 // Has a position, size, and speed of horizontal movement
 const target = {
@@ -107,6 +112,8 @@ let state = "title";
 function preload() {
     gun.body.sprite = loadImage("assets/images/player_gun.PNG")
     happyClown.sprite = loadImage("assets/images/clown.png")
+    prizes.clownPrizeSprite = loadImage("assets/images/prize_clown.PNG")
+    prizes.bearPrizeSprite = loadImage("assets/images/prize_patchbear.PNG")
 }
 
 function setup() {
@@ -390,10 +397,7 @@ function moveSpray() {
 }
 
 
-/**function preload() {
-* gunSprite = loadImage("assets/images/player_gun.PNG")
-*}
-*/
+
 
 /**
  * Displays the spray (tip and line connection) and the gun (body)
@@ -534,12 +538,17 @@ function prize01Screen() {
     textSize(32);
     textAlign(CENTER, CENTER)
     background("#321d35");
-
+    //draws the prize (teddybear)
     push();
-    fill("#db1c1c");
-    text("PRIZE01", width / 2, height / 2)
+    imageMode(CENTER);
+    image(prizes.bearPrizeSprite, width / 2, height / 2);
     pop();
-// resets game and brings the player back to title
+    // draws the prize text
+    push();
+    fill("#ffffc7");
+    text("Congrats! You won the Patchwork Teddy!", width / 2, 50)
+    pop();
+    // resets game and brings the player back to title
     if (keyIsPressed) {
         state = "title";
         resetHealthBar();
@@ -555,6 +564,12 @@ function prize02Screen() {
     textAlign(CENTER, CENTER)
     background("#321d35");
 
+    //draws the prize (clown plushie)
+    push();
+    imageMode(CENTER);
+    image(prizes.clownPrizeSprite, width / 2, height / 2);
+    pop();
+    //draws the prize text
     push();
     fill("#db1c1c");
     text("PRIZE02", width / 2, height / 2)
