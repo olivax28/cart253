@@ -245,21 +245,26 @@ function moveHitItems() {
  * Draws the Different elements, targets (blue,red, hapy clown, sad clown and healthbar) 
  */
 
-// A red and white target
+function drawTargets() {
+    push();
+    noStroke();
+    fill("#cb0000");
+    ellipse(target.x, target.y, target.size);
+    pop();
+    push();
+    noStroke();
+    fill("#FFFFFF");
+    ellipse(target.x, target.y, target.secondSize);
+    pop();
+    push();
+    noStroke();
+    fill("#cb0000");
+    ellipse(target.x, target.y, target.centerSize);
+    pop();
 
-function drawTargetObjects() {
-    let targets = {
-        x: 0,
-        y: 200, // Will be random
-        size: 50,
-        secondSize: 30,
-        centerSize: 15,
-        speed: 3
-    }
-    return targets;
 }
 
-
+// A red and white target
 function drawtarget() { //refactor
     push();
     noStroke();
