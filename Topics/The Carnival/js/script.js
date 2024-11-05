@@ -247,18 +247,6 @@ function moveHitItems() {
 
 // A red and white target
 
-function drawTargetObjects() {
-    let targets = {
-        x: 0,
-        y: 200, // Will be random
-        size: 50,
-        secondSize: 30,
-        centerSize: 15,
-        speed: 3
-    }
-    return targets;
-}
-
 
 function drawtarget() { //refactor
     push();
