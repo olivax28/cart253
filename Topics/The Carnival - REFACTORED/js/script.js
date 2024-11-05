@@ -191,7 +191,8 @@ function title() {
 function game() {
     background("#45125b");
     moveHitItems();
-    drawtarget();
+    fill(target.x, target.y, target.size, "#cb0000");
+    drawTargets();
     drawBluetarget();
     drawSadClown();
     drawHappyClown();
@@ -245,21 +246,21 @@ function moveHitItems() {
  * Draws the Different elements, targets (blue,red, hapy clown, sad clown and healthbar) 
  */
 
-function drawTargets() {
+function drawTargets(x, y, size, fill) {
     push();
     noStroke();
-    fill("#cb0000");
-    ellipse(target.x, target.y, target.size);
+    fill();
+    ellipse();
     pop();
     push();
     noStroke();
     fill("#FFFFFF");
-    ellipse(target.x, target.y, target.secondSize);
+    ellipse();
     pop();
     push();
     noStroke();
-    fill("#cb0000");
-    ellipse(target.x, target.y, target.centerSize);
+    fill();
+    ellipse();
     pop();
 
 }
