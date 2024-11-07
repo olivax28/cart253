@@ -112,8 +112,8 @@ let score = 0;
 let scoreMin = 0;
 //Timer parameters
 let timer = {
-    counter: 10,
-    max: 60,
+    counter: 30,
+    max: 30,
     min: 0,
 
 };
@@ -251,7 +251,7 @@ function moveHitItems() {
     }
 }
 
-
+// draws the target elements
 function drawTarget(target) {
     push();
     noStroke();
@@ -269,51 +269,6 @@ function drawTarget(target) {
     ellipse(target.x, target.y, target.centerSize);
     pop();
 }
-
-/**
- * Draws the Different elements, targets (blue,red, hapy clown, sad clown and healthbar) 
- */
-
-// A red and white target
-
-/*
-function drawtarget() { // this is the version before reafactoring
-    push();
-    noStroke();
-    fill("#cb0000");
-    ellipse(target.x, target.y, target.size);
-    pop();
-    push();
-    noStroke();
-    fill("#FFFFFF");
-    ellipse(target.x, target.y, target.secondSize);
-    pop();
-    push();
-    noStroke();
-    fill("#cb0000");
-    ellipse(target.x, target.y, target.centerSize);
-    pop();
-}
-
-//A Blue and White target
-function drawBluetarget() {
-    push();
-    noStroke();
-    fill("#002eff");
-    ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.size);
-    pop();
-    push();
-    noStroke();
-    fill("#FFFFFF");
-    ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.secondSize);
-    pop();
-    push();
-    noStroke();
-    fill("#002eff");
-    ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.centerSize);
-    pop();
-}
-    */
 
 //A black and white frowning clown (sprite)
 function drawSadClown() {
@@ -378,31 +333,8 @@ function drawHealthBar() {
     pop();
 }
 
-/*
- //Resets the target to the left with a random y
-function resettarget() { //refactor
-    target.x = 0;
-    target.y = random(0, 300);
-}
 
-// Resets Blue target position
-function resetBluetarget() {
-    Bluetarget.x = 0;
-    Bluetarget.y = random(0, 300);
-}
-
-function resetSadClown() {
-    sadClown.x = 0;
-    sadClown.y = random(0, 300);
-}
-
-
-function resetHappyClown() {
-    happyClown.x = 0;
-    happyClown.y = random(0, 300);
-}
-    */
-
+// resets all taget elements (including clowns)
 function resetTarget(target) {
     target.x = 0;
     target.y = random(0, 300);
@@ -531,7 +463,7 @@ function checkSprayHitElementOverlap() {
         // increase the score
         score = score - 5;
         // health goes down
-        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 10
+        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 20
         // Reset the target
         resetTarget(sadClown);
         // Bring back the spray
@@ -554,10 +486,10 @@ function checkSprayHitElementOverlap() {
 
 // determines the prizes, ending screen after countdown
 function calculatePrize() {
-    if (floor(timer.counter) == 0 && score <= 10) {
+    if (floor(timer.counter) == 0 && score <= 50) {
         state = "prize01Screen";
     }
-    else if (floor(timer.counter) == 0 && score >= 10) {
+    else if (floor(timer.counter) == 0 && score >= 50) {
         state = "prize02Screen";
     }
 }
