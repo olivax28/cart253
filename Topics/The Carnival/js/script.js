@@ -1,16 +1,22 @@
 /**
  * The Carnival Game
- * Olivia Axiuk
- * 
+    * Olivia Axiuk
+        * 
  * A carnival game, try to win the best prizes and try not to hit the sad clowns, game ends when health bar is low or timer ends.
  * 
  * Instructions:
  * - Move the gun with your mouse
- * - Click to launch the spray, press and hold for a longer reach
- * - Hit the targets, avoid the sad clowns, happy clownsa are worth more
- * 
+    * - Click to launch the spray, press and hold for a longer reach
+        * - Hit the targets, avoid the sad clowns, happy clowns are worth more
+            * sad clowns remove - 10 health and - 5 points
+                * happy clowns add health back! And add 3 points
+                    * Two levels of prizes to be won, a bear or a cuddly clown. 
+ * The bear wins for under 50 points(consider it a participation gift!)
+    * The cuddly clown wins for over 50 points
+        * Again, if the healthbar hits 0 its game over
+            * 
  * Made with p5
- * https://p5js.org/
+* https://p5js.org/
  */
 
 "use strict";
@@ -37,37 +43,34 @@ const gun = {
 
 };
 
-
+// prixes to be won, defined later as states
 const prizes = {
     clownPrizeSprite: undefined,
     bearPrizeSprite: undefined
 }
-
-
-
-/* the targets
-let target = undefined;
-let Bluetarget = undefined;
-*/
-// Our target
-// Has a position, size, and speed of horizontal movement
-//target obejcts before refactoring
+// The targets, hit to gain points
+// Has a position, size, and speed of horizontal movement as well as two levels of fill (red)
 const target = {
     x: 0,
     y: 200, // Will be random
     size: 50,
     secondSize: 30,
     centerSize: 15,
-    speed: 1.5
+    speed: 1.5,
+    mainFill: "#cb0000",
+    secondFill: "#FFFFFF"
 };
 
+// Has a position, size, and speed of horizontal movement as well as two levels of fill (blue)
 const Bluetarget = {
     x: 0,
     y: 200, // Will be random
     size: 50,
     secondSize: 30,
     centerSize: 15,
-    speed: 3
+    speed: 3,
+    mainFill: "#002eff",
+    secondFill: "#FFFFFF"
 };
 
 
@@ -91,6 +94,7 @@ const happyClown = {
     sprite: undefined
 };
 
+// the red healthbar
 let healthBar = {
     x: 20,
     y: 5,
@@ -108,8 +112,8 @@ let score = 0;
 let scoreMin = 0;
 //Timer parameters
 let timer = {
-    counter: 10,
-    max: 60,
+    counter: 30,
+    max: 30,
     min: 0,
 
 };
@@ -131,21 +135,27 @@ function preload() {
 
 function setup() {
     createCanvas(640, 480);
+    resetTarget(target);
+    resetTarget(Bluetarget);
+    resetTarget(sadClown);
+    resetTarget(happyClown);
 
-    // Give the target its first random position
-    resettarget();
-    resetBluetarget();
-    resetSadClown();
-    resetHappyClown();
-    // refactored targets
-    //target = drawTargetObjects();
-    // Bluetarget = drawTargetObjects();
+    /*
+        // Give the target its first random position
+        resettarget();
+        resetBluetarget();
+        resetSadClown();
+        resetHappyClown();
+        // refactored targets
+        //target = drawTargetObjects();
+        // Bluetarget = drawTargetObjects();
+        */
 }
 
 
 
 function draw() {
-    //Check the state
+    //Check the state the game is in (title, gameplay, gameover and prizes)
     if (state === "title") {
         title();
     }
@@ -180,6 +190,11 @@ function title() {
     text(titleString, width / 2, height / 2)
     pop();
 
+    push();
+    fill("#");
+    text("Click to Begin", width / 2, 350)
+    pop();
+
     if (mouseIsPressed) {
         state = "game";
     }
@@ -191,8 +206,8 @@ function title() {
 function game() {
     background("#45125b");
     moveHitItems();
-    drawtarget();
-    drawBluetarget();
+    drawTarget(Bluetarget);
+    drawTarget(target);
     drawSadClown();
     drawHappyClown();
     movegun();
@@ -217,71 +232,46 @@ function moveHitItems() {
     target.x += target.speed;
     // Handle the target going off the canvas
     if (target.x > width) {
-        resettarget();
+        resetTarget(target);
     }
     //Move the Blue target
     Bluetarget.x += Bluetarget.speed;
     // Handle the target going off the canvas
     if (Bluetarget.x > width) {
-        resetBluetarget();
+        resetTarget(Bluetarget);
     }
     // moves the sad clown
     sadClown.x += sadClown.speed;
     // Handle the target going off the canvas
     if (sadClown.x > width) {
-        resetSadClown();
+        resetTarget(sadClown);
 
     }
     // moves the happy clown
     happyClown.x += happyClown.speed;
     // Handle the target going off the canvas
     if (happyClown.x > width) {
-        resetHappyClown();
+        resetTarget(happyClown);
 
     }
 }
 
-/**
- * Draws the Different elements, targets (blue,red, hapy clown, sad clown and healthbar) 
- */
-
-// A red and white target
-
-
-function drawtarget() { //refactor
+// draws the target elements
+function drawTarget(target) {
     push();
     noStroke();
-    fill("#cb0000");
+    fill(target.mainFill);
     ellipse(target.x, target.y, target.size);
     pop();
     push();
     noStroke();
-    fill("#FFFFFF");
+    fill(target.secondFill);
     ellipse(target.x, target.y, target.secondSize);
     pop();
     push();
     noStroke();
-    fill("#cb0000");
+    fill(target.mainFill);
     ellipse(target.x, target.y, target.centerSize);
-    pop();
-}
-
-//A Blue and White target
-function drawBluetarget() {
-    push();
-    noStroke();
-    fill("#002eff");
-    ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.size);
-    pop();
-    push();
-    noStroke();
-    fill("#FFFFFF");
-    ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.secondSize);
-    pop();
-    push();
-    noStroke();
-    fill("#002eff");
-    ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.centerSize);
     pop();
 }
 
@@ -348,29 +338,11 @@ function drawHealthBar() {
     pop();
 }
 
-/**
- * Resets the target to the left with a random y
- */
-function resettarget() { //refactor
+
+// resets all taget elements (including clowns)
+function resetTarget(target) {
     target.x = 0;
     target.y = random(0, 300);
-}
-
-// Resets Blue target position
-function resetBluetarget() {
-    Bluetarget.x = 0;
-    Bluetarget.y = random(0, 300);
-}
-
-function resetSadClown() {
-    sadClown.x = 0;
-    sadClown.y = random(0, 300);
-}
-
-
-function resetHappyClown() {
-    happyClown.x = 0;
-    happyClown.y = random(0, 300);
 }
 
 //resets the the healthbar
@@ -479,7 +451,7 @@ function checkSprayHitElementOverlap() {
         // increase the score
         score = score + 1;
         // Reset the target
-        resettarget();
+        resetTarget(target);
         // Bring back the spray
         gun.spray.state = "inbound";
     }
@@ -487,7 +459,7 @@ function checkSprayHitElementOverlap() {
         // increase the score
         score = score + 2;
         // Reset the target
-        resetBluetarget();
+        resetTarget(Bluetarget);
         // Bring back the spray
         gun.spray.state = "inbound";
     }
@@ -498,7 +470,7 @@ function checkSprayHitElementOverlap() {
         // health goes down
         healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 10
         // Reset the target
-        resetSadClown();
+        resetTarget(sadClown);
         // Bring back the spray
         gun.spray.state = "inbound";
         if (healthBar.HealthlvlWidth - 10 == 0) {
@@ -511,7 +483,7 @@ function checkSprayHitElementOverlap() {
         // health goes down
         healthBar.HealthlvlWidth = healthBar.HealthlvlWidth + 10;
         // Reset the target
-        resetHappyClown();
+        resetTarget(happyClown);
         // Bring back the spray
         gun.spray.state = "inbound";
     }
@@ -519,10 +491,10 @@ function checkSprayHitElementOverlap() {
 
 // determines the prizes, ending screen after countdown
 function calculatePrize() {
-    if (floor(timer.counter) == 0 && score <= 10) {
+    if (floor(timer.counter) == 0 && score <= 50) {
         state = "prize01Screen";
     }
-    else if (floor(timer.counter) == 0 && score >= 10) {
+    else if (floor(timer.counter) == 0 && score >= 50) {
         state = "prize02Screen";
     }
 }
