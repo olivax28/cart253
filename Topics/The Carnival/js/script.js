@@ -139,17 +139,6 @@ function setup() {
     resetTarget(Bluetarget);
     resetTarget(sadClown);
     resetTarget(happyClown);
-
-    /*
-        // Give the target its first random position
-        resettarget();
-        resetBluetarget();
-        resetSadClown();
-        resetHappyClown();
-        // refactored targets
-        //target = drawTargetObjects();
-        // Bluetarget = drawTargetObjects();
-        */
 }
 
 
@@ -429,7 +418,7 @@ function drawgun() {
 }
 
 /**
- * Handles the spray overlapping the flies
+ * Handles the spray overlapping the targets
  */
 function checkSprayHitElementOverlap() {
     // Get distance from spray to the hit elements
@@ -510,6 +499,7 @@ function mousePressed() {
 
 }
 
+// allows for spray to top once player releases mouse
 function mouseReleased() {
     gun.spray.state = "inbound";
 }
