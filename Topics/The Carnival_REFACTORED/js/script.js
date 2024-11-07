@@ -58,7 +58,9 @@ const target = {
     size: 50,
     secondSize: 30,
     centerSize: 15,
-    speed: 1.5
+    speed: 1.5,
+    mainFill: "#cb0000",
+    secondFill: "#FFFFFF"
 };
 
 const Bluetarget = {
@@ -67,7 +69,9 @@ const Bluetarget = {
     size: 50,
     secondSize: 30,
     centerSize: 15,
-    speed: 3
+    speed: 3,
+    mainFill: "#002eff",
+    secondFill: "#FFFFFF"
 };
 
 
@@ -191,8 +195,8 @@ function title() {
 function game() {
     background("#45125b");
     moveHitItems();
-    drawtarget();
-    drawBluetarget();
+    drawTarget(Bluetarget);
+    drawTarget(target);
     drawSadClown();
     drawHappyClown();
     movegun();
@@ -241,14 +245,33 @@ function moveHitItems() {
     }
 }
 
+
+function drawTarget(target) {
+    push();
+    noStroke();
+    fill(target.mainFill);
+    ellipse(target.x, target.y, target.size);
+    pop();
+    push();
+    noStroke();
+    fill(target.secondFill);
+    ellipse(target.x, target.y, target.secondSize);
+    pop();
+    push();
+    noStroke();
+    fill(target.mainFill);
+    ellipse(target.x, target.y, target.centerSize);
+    pop();
+}
+
 /**
  * Draws the Different elements, targets (blue,red, hapy clown, sad clown and healthbar) 
  */
 
 // A red and white target
 
-
-function drawtarget() { //refactor
+/*
+function drawtarget() { //before reafactoring
     push();
     noStroke();
     fill("#cb0000");
@@ -284,6 +307,7 @@ function drawBluetarget() {
     ellipse(Bluetarget.x, Bluetarget.y, Bluetarget.centerSize);
     pop();
 }
+    */
 
 //A black and white frowning clown (sprite)
 function drawSadClown() {
