@@ -135,15 +135,21 @@ function preload() {
 
 function setup() {
     createCanvas(640, 480);
+    resetTarget(target);
+    resetTarget(Bluetarget);
+    resetTarget(sadClown);
+    resetTarget(happyClown);
 
-    // Give the target its first random position
-    resettarget();
-    resetBluetarget();
-    resetSadClown();
-    resetHappyClown();
-    // refactored targets
-    //target = drawTargetObjects();
-    // Bluetarget = drawTargetObjects();
+    /*
+        // Give the target its first random position
+        resettarget();
+        resetBluetarget();
+        resetSadClown();
+        resetHappyClown();
+        // refactored targets
+        //target = drawTargetObjects();
+        // Bluetarget = drawTargetObjects();
+        */
 }
 
 
@@ -221,26 +227,26 @@ function moveHitItems() {
     target.x += target.speed;
     // Handle the target going off the canvas
     if (target.x > width) {
-        resettarget();
+        resetTarget(target);
     }
     //Move the Blue target
     Bluetarget.x += Bluetarget.speed;
     // Handle the target going off the canvas
     if (Bluetarget.x > width) {
-        resetBluetarget();
+        resetTarget(Bluetarget);
     }
     // moves the sad clown
     sadClown.x += sadClown.speed;
     // Handle the target going off the canvas
     if (sadClown.x > width) {
-        resetSadClown();
+        resetTarget(sadClown);
 
     }
     // moves the happy clown
     happyClown.x += happyClown.speed;
     // Handle the target going off the canvas
     if (happyClown.x > width) {
-        resetHappyClown();
+        resetTarget(happyClown);
 
     }
 }
@@ -271,7 +277,7 @@ function drawTarget(target) {
 // A red and white target
 
 /*
-function drawtarget() { //before reafactoring
+function drawtarget() { // this is the version before reafactoring
     push();
     noStroke();
     fill("#cb0000");
@@ -372,9 +378,8 @@ function drawHealthBar() {
     pop();
 }
 
-/**
- * Resets the target to the left with a random y
- */
+/*
+ //Resets the target to the left with a random y
 function resettarget() { //refactor
     target.x = 0;
     target.y = random(0, 300);
@@ -395,6 +400,12 @@ function resetSadClown() {
 function resetHappyClown() {
     happyClown.x = 0;
     happyClown.y = random(0, 300);
+}
+    */
+
+function resetTarget(target) {
+    target.x = 0;
+    target.y = random(0, 300);
 }
 
 //resets the the healthbar
@@ -503,7 +514,7 @@ function checkSprayHitElementOverlap() {
         // increase the score
         score = score + 1;
         // Reset the target
-        resettarget();
+        resetTarget(target);
         // Bring back the spray
         gun.spray.state = "inbound";
     }
@@ -511,7 +522,7 @@ function checkSprayHitElementOverlap() {
         // increase the score
         score = score + 2;
         // Reset the target
-        resetBluetarget();
+        resetTarget(Bluetarget);
         // Bring back the spray
         gun.spray.state = "inbound";
     }
@@ -522,7 +533,7 @@ function checkSprayHitElementOverlap() {
         // health goes down
         healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 10
         // Reset the target
-        resetSadClown();
+        resetTarget(sadClown);
         // Bring back the spray
         gun.spray.state = "inbound";
         if (healthBar.HealthlvlWidth - 10 == 0) {
@@ -535,7 +546,7 @@ function checkSprayHitElementOverlap() {
         // health goes down
         healthBar.HealthlvlWidth = healthBar.HealthlvlWidth + 10;
         // Reset the target
-        resetHappyClown();
+        resetTarget(happyClown);
         // Bring back the spray
         gun.spray.state = "inbound";
     }
