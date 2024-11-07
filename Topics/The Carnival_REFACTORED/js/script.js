@@ -468,7 +468,7 @@ function checkSprayHitElementOverlap() {
         // increase the score
         score = score - 5;
         // health goes down
-        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 20
+        healthBar.HealthlvlWidth = healthBar.HealthlvlWidth - 10
         // Reset the target
         resetTarget(sadClown);
         // Bring back the spray
