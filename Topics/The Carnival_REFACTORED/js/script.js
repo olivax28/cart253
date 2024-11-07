@@ -190,6 +190,11 @@ function title() {
     text(titleString, width / 2, height / 2)
     pop();
 
+    push();
+    fill("#");
+    text("Click to Begin", width / 2, 350)
+    pop();
+
     if (mouseIsPressed) {
         state = "game";
     }
