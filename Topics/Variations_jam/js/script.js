@@ -16,7 +16,7 @@
 let playerShip = {
     body: {
         x: 540,
-        y: 650,
+        y: 630,
         sprite: undefined,
         size: 30,
         velocity: 6,
