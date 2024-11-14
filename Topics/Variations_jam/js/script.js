@@ -9,12 +9,14 @@
 
 let playerShip = {
     body: {
-        x: 320,
-        y: 420,
+        x: 540,
+        y: 700,
         sprite: undefined,
+        size: 30,
+        velocity: 6,
 
     },
-    // The gun's spray has a position, size, speed, and state
+    // The bullet has a position, size, speed, and state
     bullet: {
         x: undefined,
         y: 480,
@@ -28,10 +30,8 @@ let playerShip = {
 
 }
 
+let state = "playGame"
 
-
-
-// The targets, hit to gain points
 // Has a position, size, and speed of horizontal movement as well as two levels of fill (red)
 const spaceInvader = {
     x: 100, // will be random
@@ -50,12 +50,17 @@ let healthBar = {
     color: "#7eff1b"
 }
 
+function preload() {
+    playerShip.body.sprite = loadImage("assets/images/playerShip.PNG")
+}
+
 
 /**
  * OH LOOK I DIDN'T DESCRIBE SETUP!!
 */
 function setup() {
     createCanvas(1080, 720);
+    
 
 
 }
@@ -67,4 +72,35 @@ function setup() {
 function draw() {
     background(0, 0, 0);
 
+    if (state === "title") {
+        title();
+    }
+    if (state === "playGame") {
+        playGame();
+    }
 }
+
+
+function playGame(){
+ drawPlayerShip();
+ movePlayer();
+}
+
+function movePlayer(){
+    if (keyIsDown(LEFT_ARROW)){
+        playerShip.body.x -= playerShip.body.velocity;
+    } else if (keyIsDown(RIGHT_ARROW)) {
+        playerShip.body.x += playerShip.body.velocity;
+    }
+}
+
+function drawPlayerShip(){
+    push();
+    imageMode(CENTER);
+    image(playerShip.body.sprite, playerShip.body.x, playerShip.body.y);
+    pop();
+}
+
+
+
+
