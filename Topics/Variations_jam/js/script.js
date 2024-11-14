@@ -3,14 +3,20 @@
  * Olivia Axiuk
  * 
  *(GAME DESCRIPTION HERE)
- */
+ notes:
+ have timer in main game that leads to a screen (before health bar is dead)
+ alien character dialogu, brings back to menu - cannot enter PLAy version of te game again (do not reset the timer)
+ other two versions:
+ story mode (interrupting story)
+ Defender Mode (play as an alien)
+ */ 
 
 "use strict";
 
 let playerShip = {
     body: {
         x: 540,
-        y: 700,
+        y: 650,
         sprite: undefined,
         size: 30,
         velocity: 6,
@@ -92,12 +98,15 @@ function movePlayer(){
     } else if (keyIsDown(RIGHT_ARROW)) {
         playerShip.body.x += playerShip.body.velocity;
     }
+    playerShip.body.x = constrain(playerShip.body.x,0, width);
 }
+
+
 
 function drawPlayerShip(){
     push();
     imageMode(CENTER);
-    image(playerShip.body.sprite, playerShip.body.x, playerShip.body.y);
+    image(playerShip.body.sprite, playerShip.body.x,playerShip.body.y);
     pop();
 }
 
