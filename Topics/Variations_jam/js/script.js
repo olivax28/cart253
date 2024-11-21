@@ -9,7 +9,7 @@
  other two versions:
  story mode (interrupting story)
  Defender Mode (play as an alien)
- */ 
+ */
 
 "use strict";
 
@@ -22,19 +22,12 @@ let playerShip = {
         velocity: 6,
 
     },
-    // The bullet has a position, size, speed, and state
-    bullet: {
-        x: undefined,
-        y: 480,
-        size: 10,
-        speed: 30,
-        // Determines how the spray moves each frame
-        state: "idle" // State can be: idle, outbound, inbound
-    },
-
-
-
 }
+
+
+// The bullet array
+let bullets = []
+
 
 let state = "playGame"
 
@@ -56,24 +49,37 @@ let healthBar = {
     color: "#7eff1b"
 }
 
+//load in all sprites
 function preload() {
     playerShip.body.sprite = loadImage("assets/images/playerShip.PNG")
 }
 
 
 /**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
+ * creates the canvas
 */
 function setup() {
     createCanvas(1080, 720);
-    
+
 
 
 }
 
+//creates the bullet elements that appear at the player's location
+function createBullets() {
+    let bullet = {
+        x: playerShip.body.x,
+        y: playerShip.body.y,
+        velocity: 20,
+        size: 20,
+        fill: "#ffffff"
+    }
+    return bullet
+}
+
 
 /**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
+ * drawws black background and sets the states
 */
 function draw() {
     background(0, 0, 0);
@@ -86,29 +92,59 @@ function draw() {
     }
 }
 
+//The main game mode
+function playGame() {
+    // bullet for loop
+    for (let bullet of bullets) {
+        moveBullet(bullet);
+        drawBullet(bullet);
+    }
+    drawSpriteElements(playerShip);
+    movePlayer();
 
-function playGame(){
- drawPlayerShip();
- movePlayer();
+
 }
 
-function movePlayer(){
-    if (keyIsDown(LEFT_ARROW)){
+// moves the player ship
+function movePlayer() {
+    if (keyIsDown(LEFT_ARROW)) {
         playerShip.body.x -= playerShip.body.velocity;
     } else if (keyIsDown(RIGHT_ARROW)) {
         playerShip.body.x += playerShip.body.velocity;
     }
-    playerShip.body.x = constrain(playerShip.body.x,0, width);
+    playerShip.body.x = constrain(playerShip.body.x, 0, width);
 }
 
-
-
-function drawPlayerShip(){
+// responsible for drawing all the elements that have sprites
+function drawSpriteElements(spriteObject) {
     push();
     imageMode(CENTER);
-    image(playerShip.body.sprite, playerShip.body.x,playerShip.body.y);
+    image(spriteObject.body.sprite, spriteObject.body.x, spriteObject.body.y);
     pop();
 }
+
+// shoots bullets as player clicks the spcaebar
+function keyPressed() {
+    if (keyCode === 32) {
+        bullets.push(createBullets())
+        console.log(bullets);
+    }
+}
+
+//draws the bullet
+function drawBullet(bullet) {
+    push();
+    fill(bullet.fill);
+    ellipse(bullet.x, bullet.y, bullet.size);
+    pop();
+}
+
+//Moves the bullet
+function moveBullet(bullet) {
+    bullet.y -= bullet.velocity;
+
+}
+
 
 
 
