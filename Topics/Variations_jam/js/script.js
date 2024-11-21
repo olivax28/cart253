@@ -29,7 +29,7 @@ let playerShip = {
 let bullets = []
 
 
-let state = "playGame"
+let state = "title"
 
 // Has a position, size, and speed of horizontal movement as well as two levels of fill (red)
 const spaceInvader = {
@@ -92,6 +92,28 @@ function draw() {
     }
 }
 
+
+function title() {
+    //sets size and alignment of the Title text 
+    textSize(32);
+    textAlign(CENTER, CENTER)
+    background("#000000");
+
+    push();
+    fill("#");
+    text("Astral Projectiles", width / 2, height / 2)
+    pop();
+
+    push();
+    fill("#");
+    text("Click to Begin", width / 2, 300)
+    pop();
+
+    if (mouseIsPressed) {
+        state = "playGame";
+    }
+}
+
 //The main game mode
 function playGame() {
     // bullet for loop
@@ -101,6 +123,7 @@ function playGame() {
     }
     drawSpriteElements(playerShip);
     movePlayer();
+    destroyBullet();
 
 
 }
@@ -127,7 +150,7 @@ function drawSpriteElements(spriteObject) {
 function keyPressed() {
     if (keyCode === 32) {
         bullets.push(createBullets())
-        console.log(bullets);
+
     }
 }
 
@@ -144,6 +167,25 @@ function moveBullet(bullet) {
     bullet.y -= bullet.velocity;
 
 }
+
+//code from changing-arrays video by Pippin Barr
+
+function destroyBullet() {
+    //check all the bullet if they hit the edge of the canvas, they disappear
+    for (let bullet of bullets) {
+        const bulletDistance = dist(bullet.size, height)
+        if (bulletDistance < bullet.size) {
+            //bullet hit top
+            //get index of the bullet
+            const index = bullets.indexOf(bullet);
+            //splice the bullet out of the bullets array
+            bullets.splice(index, 1);
+        }
+    }
+}
+
+
+
 
 
 
