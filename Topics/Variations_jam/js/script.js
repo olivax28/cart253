@@ -25,9 +25,9 @@ const playerShip = {
 }
 
 
-const enemyShip = {
+let enemyShip = {
     body: {
-        x: 540,
+        x: 1,
         y: 400,
         sprite: undefined,
         size: 30,
@@ -39,6 +39,8 @@ const enemyShip = {
 
 // The bullet array
 let bullets = []
+
+//let enemyShip = []
 
 
 let state = "title"
@@ -89,6 +91,22 @@ function createBullets() {
     }
     return bullet
 }
+
+/**
+ * function enemyShips() {
+    let enemyShip = {
+        body: {
+            x: 1,
+            y: 400,
+            sprite: undefined,
+            size: 30,
+            velocity: 10,
+
+        },
+    }
+    return enemyShip
+}
+*/
 
 
 /**
