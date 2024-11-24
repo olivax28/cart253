@@ -13,13 +13,25 @@
 
 "use strict";
 
-let playerShip = {
+const playerShip = {
     body: {
         x: 540,
         y: 630,
         sprite: undefined,
         size: 30,
         velocity: 6,
+
+    },
+}
+
+
+const enemyShip = {
+    body: {
+        x: 540,
+        y: 400,
+        sprite: undefined,
+        size: 30,
+        velocity: 10,
 
     },
 }
@@ -52,6 +64,7 @@ let healthBar = {
 //load in all sprites
 function preload() {
     playerShip.body.sprite = loadImage("assets/images/playerShip.PNG")
+    enemyShip.body.sprite = loadImage("assets/images/enemyShip.PNG")
 }
 
 
@@ -122,6 +135,7 @@ function playGame() {
         drawBullet(bullet);
     }
     drawSpriteElements(playerShip);
+    drawSpriteElements(enemyShip);
     movePlayer();
     destroyBullet();
 
