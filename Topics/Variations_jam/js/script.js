@@ -25,18 +25,6 @@ const playerShip = {
 }
 
 
-let enemyShip = {
-    body: {
-        x: 1,
-        y: 400,
-        sprite: undefined,
-        size: 30,
-        velocity: 10,
-
-    },
-}
-
-
 // The bullet array
 let bullets = []
 
@@ -66,7 +54,7 @@ let healthBar = {
 //load in all sprites
 function preload() {
     playerShip.body.sprite = loadImage("assets/images/playerShip.PNG")
-    enemyShip.body.sprite = loadImage("assets/images/enemyShip.PNG")
+    //enemyShip.body.sprite = loadImage("assets/images/enemyShip.PNG")
 }
 
 
@@ -92,21 +80,21 @@ function createBullets() {
     return bullet
 }
 
-/**
- * function enemyShips() {
+function createEnemyShips() {
     let enemyShip = {
         body: {
             x: 1,
             y: 400,
-            sprite: undefined,
+            //sprite: undefined,
             size: 30,
             velocity: 10,
+            fill: "#419605"
 
         },
     }
     return enemyShip
 }
-*/
+
 
 
 /**
@@ -153,11 +141,13 @@ function playGame() {
         drawBullet(bullet);
     }
     drawSpriteElements(playerShip);
-    drawSpriteElements(enemyShip);
+    //drawSpriteElements(enemyShip);
     movePlayer();
     destroyBullet();
-
-
+    for (let enemyShip of enemyShips) {
+        moveEnemyShip(enemyShip);
+        drawEnemyShip(enemyShip);
+    }
 }
 
 // moves the player ship
@@ -178,6 +168,13 @@ function drawSpriteElements(spriteObject) {
     pop();
 }
 
+function drawEnemyShip() {
+    push();
+    fill(enemyShip.fill)
+    ellipse(enemyShip.x, enemyShip.y, enemyShip.size);
+    pop();
+}
+
 // shoots bullets as player clicks the spcaebar
 function keyPressed() {
     if (keyCode === 32) {
@@ -185,6 +182,7 @@ function keyPressed() {
 
     }
 }
+
 
 //draws the bullet
 function drawBullet(bullet) {
@@ -198,6 +196,10 @@ function drawBullet(bullet) {
 function moveBullet(bullet) {
     bullet.y -= bullet.velocity;
 
+}
+
+function moveEnemyShip() {
+    enemyShip.y += enemyShip.velocity
 }
 
 //code from changing-arrays video by Pippin Barr
