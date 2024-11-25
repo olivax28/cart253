@@ -25,11 +25,11 @@ const playerShip = {
 }
 
 
-// The bullet array
+// The needed arrays
 let bullets = []
 let enemyShips = []
 
-//let enemyShip = []
+
 
 
 let state = "title"
@@ -92,8 +92,6 @@ function preload() {
 */
 function setup() {
     createCanvas(1080, 720);
-
-
 
 }
 
