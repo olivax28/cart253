@@ -51,6 +51,34 @@ let healthBar = {
     color: "#7eff1b"
 }
 
+const titleBoxPlay = {
+    x: 300,
+    y: 100,
+    w: 500,
+    h: 100,
+    fill: "#ee2525",
+
+}
+
+
+const titleBoxStory = {
+    x: 400,
+    y: 450,
+    w: 250,
+    h: 80,
+    fill: "#ee2525",
+
+}
+
+
+const titleBoxDefender = {
+    x: 400,
+    y: 550,
+    w: 250,
+    h: 80,
+    fill: "#ee2525",
+}
+
 //load in all sprites
 function preload() {
     playerShip.body.sprite = loadImage("assets/images/playerShip.PNG")
@@ -128,9 +156,31 @@ function title() {
     text("Click to Begin", width / 2, 300)
     pop();
 
+
+    push();
+    fill("#");
+    text("Click to Begin", width / 2, 300)
+    pop();
+
+    drawTitleBoxes(titleBoxPlay);
+
+    drawTitleBoxes(titleBoxStory);
+
+    drawTitleBoxes(titleBoxDefender);
+
     if (mouseIsPressed) {
         state = "playGame";
     }
+}
+
+//functions for the title Screen
+
+function drawTitleBoxes(titleBox) {
+    push();
+    noStroke();
+    fill(titleBox.fill);
+    rect(titleBox.x, titleBox.y, titleBox.w, titleBox.h);
+    pop();
 }
 
 //The main game mode
