@@ -27,6 +27,7 @@ const playerShip = {
 
 // The bullet array
 let bullets = []
+let enemyShips = []
 
 //let enemyShip = []
 
