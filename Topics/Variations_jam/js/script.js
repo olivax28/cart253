@@ -32,7 +32,7 @@ let enemyShips = []
 
 
 
-let state = "title"
+let state = "playGame"
 
 // Has a position, size, and speed of horizontal movement as well as two levels of fill (red)
 const spaceInvader = {
@@ -58,6 +58,7 @@ const titleBoxPlay = {
     w: 500,
     h: 100,
     fill: "#ee2525",
+    state: "playGame"
 
 }
 
@@ -68,6 +69,7 @@ const titleBoxStory = {
     w: 250,
     h: 80,
     fill: "#ee2525",
+    state: "storyMode"
 
 }
 
@@ -78,6 +80,7 @@ const titleBoxDefender = {
     w: 250,
     h: 80,
     fill: "#ee2525",
+    state: "defenderMode"
 }
 
 //load in all sprites
@@ -136,6 +139,12 @@ function draw() {
     if (state === "playGame") {
         playGame();
     }
+    if (state === "storyMode") {
+        storyMode();
+    }
+    if (state === "defenderMode") {
+        defenderMode();
+    }
 }
 
 
@@ -167,8 +176,21 @@ function title() {
 
     drawTitleBoxes(titleBoxDefender);
 
-    if (mouseIsPressed) {
-        state = "playGame";
+    gamePick(titleBoxPlay);
+    gamePick(titleBoxDefender);
+    gamePick(titleBoxStory);
+
+}
+
+
+function gamePick() {
+    // Get distance from spray to the hit elements
+    const titleBoxArea = titleBox.width * titleBox.height;
+    const playerClickD = dist(mouse.x, mouse.y, titleBoxArea);
+    // Check if it's an overlap
+    const playerChoose = (playerClickD < mouse.x, mouse.y + titleBoxArea);
+    if (playerChoose && mouseIsPressed) {
+        state = titleBox.state
     }
 }
 
