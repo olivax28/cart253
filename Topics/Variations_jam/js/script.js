@@ -95,6 +95,8 @@ function preload() {
 */
 function setup() {
     createCanvas(1080, 720);
+    const newShip = createEnemyShips();
+    enemyShips.push(newShip);
 
 }
 
@@ -239,10 +241,10 @@ function drawSpriteElements(spriteObject) {
     pop();
 }
 
-function drawEnemyShip() {
+function drawEnemyShip(enemyShip) {
     push();
-    fill(enemyShip.fill)
-    ellipse(enemyShip.x, enemyShip.y, enemyShip.size);
+    fill(enemyShip.body.fill)
+    ellipse(enemyShip.body.x, enemyShip.body.y, enemyShip.body.size);
     pop();
 }
 
@@ -255,8 +257,8 @@ function keyPressed() {
 }
 
 function spawnEnemy() {
-    if (enemyShip.y = 400) {
-        enemyShips.push(createEnemyShipss())
+    if (enemyShip.body.y === 400) {
+        enemyShips.push(createEnemyShips())
 
     }
 }
@@ -277,8 +279,8 @@ function moveBullet(bullet) {
 
 }
 
-function moveEnemyShip() {
-    enemyShip.y += enemyShip.velocity
+function moveEnemyShip(enemyShip) {
+    enemyShip.body.y += enemyShip.body.velocity
 }
 
 //code from changing-arrays video by Pippin Barr
