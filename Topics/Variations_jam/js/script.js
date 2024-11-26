@@ -110,8 +110,8 @@ function createBullets() {
 function createEnemyShips() {
     let enemyShip = {
         body: {
-            x: 1,
-            y: 400,
+            x: (random),
+            y: 0,
             //sprite: undefined,
             size: 30,
             velocity: 10,
@@ -231,6 +231,14 @@ function keyPressed() {
 
     }
 }
+
+function spawnEnemy() {
+    if (enemyShip.y = 400) {
+        enemyShips.push(createEnemyShipss())
+
+    }
+}
+
 
 
 //draws the bullet
