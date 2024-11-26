@@ -115,7 +115,7 @@ function createBullets() {
 function createEnemyShips() {
     let enemyShip = {
         body: {
-            x: (random),
+            x: random(0, width),
             y: 0,
             //sprite: undefined,
             size: 30,
