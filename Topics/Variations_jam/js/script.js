@@ -185,13 +185,13 @@ function title() {
 }
 
 
-function gamePick() {
+function gamePick(titleBox) {
     // Get distance from spray to the hit elements
     const titleBoxArea = titleBox.width * titleBox.height;
-    const playerClickD = dist(mouse.x, mouse.y, titleBoxArea);
+    const playerClickD = dist(mouseX, mouseY, titleBoxArea);
     // Check if it's an overlap
-    const playerChoose = (playerClickD < mouse.x, mouse.y + titleBoxArea);
-    if (playerChoose && mouseIsPressed) {
+    const playerChoose = (playerClickD < mouseX, mouseY + titleBoxArea);
+    if (playerChoose && mouseIsPressed()) {
         state = titleBox.state
     }
 }
@@ -256,7 +256,7 @@ function keyPressed() {
     }
 }
 
-function spawnEnemy() {
+function spawnEnemy(enemyShip) {
     if (enemyShip.body.y === 400) {
         enemyShips.push(createEnemyShips())
 
