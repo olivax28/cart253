@@ -57,8 +57,8 @@ let score = 0;
 let scoreMin = 0;
 //Timer parameters
 let timer = {
-    counter: 30,
-    max: 30,
+    counter: 10,
+    max: 10,
     min: 0,
 
 };
@@ -241,6 +241,8 @@ function playGame() {
     }
     drawScore();
     drawHealthBar();
+    countDown();
+    playGameEnd();
 }
 
 
@@ -260,6 +262,9 @@ function moveBullet(bullet) {
 
 }
 
+function countDown() {
+    timer.counter -= 1 / (frameRate());
+}
 
 /**
  * Handles the spray overlapping the targets
@@ -352,6 +357,13 @@ function destroyBullet() {
             //splice the bullet out of the bullets array
             bullets.splice(index, 1);
         }
+    }
+}
+
+function playGameEnd() {
+    if (floor(timer.counter) == 0) {
+        state = "title"
+        console.log(timer.counter);
     }
 }
 
