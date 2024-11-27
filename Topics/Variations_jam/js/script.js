@@ -130,7 +130,7 @@ function createEnemyShips() {
             y: 0,
             //sprite: undefined,
             size: 30,
-            velocity: 5,
+            velocity: 2,
             fill: "#419605"
 
         },
@@ -254,6 +254,32 @@ function movePlayer() {
     playerShip.body.x = constrain(playerShip.body.x, 0, width);
 }
 
+//Moves the bullet
+function moveBullet(bullet) {
+    bullet.y -= bullet.velocity;
+
+}
+
+
+/**
+ * Handles the spray overlapping the targets
+ */
+function checkBulletEnemyOverlap() {
+    // Get distance from spray to the hit elements
+    const enemyD = dist(bullet.x, bullet.y, enemyShip.body.x, enemyShip.body.y);
+    // Check if it's an overlap
+    const enemyHit = (enemyD < bullet.size / 2 + enemmyShip.body.size / 2);
+    if (enemyHit) {
+        // increase the score
+        score = score + 1;
+    }
+}
+
+// move the enemy ships
+function moveEnemyShip(enemyShip) {
+    enemyShip.body.y += enemyShip.body.velocity
+}
+
 // responsible for drawing all the elements that have sprites
 function drawSpriteElements(spriteObject) {
     push();
@@ -276,7 +302,6 @@ function drawScore() {
     fill("#ff9300");
     text(score, width, 0);
     pop();
-
 
 }
 
@@ -306,23 +331,12 @@ function spawnEnemy(enemyShip) {
 }
 
 
-
 //draws the bullet
 function drawBullet(bullet) {
     push();
     fill(bullet.fill);
     ellipse(bullet.x, bullet.y, bullet.size);
     pop();
-}
-
-//Moves the bullet
-function moveBullet(bullet) {
-    bullet.y -= bullet.velocity;
-
-}
-
-function moveEnemyShip(enemyShip) {
-    enemyShip.body.y += enemyShip.body.velocity
 }
 
 //code from changing-arrays video by Pippin Barr
