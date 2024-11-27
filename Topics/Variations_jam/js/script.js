@@ -44,13 +44,24 @@ const spaceInvader = {
 
 // the red healthbar
 let healthBar = {
-    x: 20,
-    y: 5,
-    HealthlvlWidth: 100,
-    maxWidth: 100,
+    x: 400,
+    y: 10,
+    HealthlvlWidth: 300,
+    maxWidth: 300,
     h: 30,
-    color: "#7eff1b"
+    color: "#ff1b1b"
 }
+
+// the current score and its minimum for resetting purposes
+let score = 0;
+let scoreMin = 0;
+//Timer parameters
+let timer = {
+    counter: 30,
+    max: 30,
+    min: 0,
+
+};
 
 const titleBoxPlay = {
     x: 300,
@@ -119,7 +130,7 @@ function createEnemyShips() {
             y: 0,
             //sprite: undefined,
             size: 30,
-            velocity: 10,
+            velocity: 5,
             fill: "#419605"
 
         },
@@ -181,7 +192,6 @@ function title() {
     gamePick(titleBoxPlay);
     gamePick(titleBoxDefender);
     gamePick(titleBoxStory);
-
 }
 
 
@@ -206,6 +216,14 @@ function drawTitleBoxes(titleBox) {
     pop();
 }
 
+
+
+
+
+
+
+
+
 //The main game mode
 function playGame() {
     // bullet for loop
@@ -221,7 +239,10 @@ function playGame() {
         moveEnemyShip(enemyShip);
         drawEnemyShip(enemyShip);
     }
+    drawScore();
+    drawHealthBar();
 }
+
 
 // moves the player ship
 function movePlayer() {
@@ -247,6 +268,27 @@ function drawEnemyShip(enemyShip) {
     ellipse(enemyShip.body.x, enemyShip.body.y, enemyShip.body.size);
     pop();
 }
+/// displays the score in top right 
+function drawScore() {
+    push();
+    textAlign(RIGHT, TOP);
+    textSize(100);
+    fill("#ff9300");
+    text(score, width, 0);
+    pop();
+
+
+}
+
+// a red bar that gets shorter as the player hits the sad clowns
+function drawHealthBar() {
+    push();
+    noStroke();
+    fill(healthBar.color);
+    rect(healthBar.x, healthBar.y, healthBar.HealthlvlWidth, healthBar.h);
+    pop();
+
+}
 
 // shoots bullets as player clicks the spcaebar
 function keyPressed() {
@@ -257,7 +299,7 @@ function keyPressed() {
 }
 
 function spawnEnemy(enemyShip) {
-    if (enemyShip.body.y === 400) {
+    if (enemyShip.body.y >= 400) {
         enemyShips.push(createEnemyShips())
 
     }
@@ -298,6 +340,8 @@ function destroyBullet() {
         }
     }
 }
+
+
 
 
 
