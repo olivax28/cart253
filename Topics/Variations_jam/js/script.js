@@ -16,7 +16,7 @@ const playerShip = {
         x: 540,
         y: 630,
         sprite: undefined,
-        size: 30,
+        size: 40,
         velocity: 6,
 
     },
@@ -34,14 +34,6 @@ let enemyShipDelay = maximumEnemyDelay;
 
 //sets the initial state
 let state = "playGame"
-
-// Has a position, size, and speed of horizontal movement as well as two levels of fill (red)
-const spaceInvader = {
-    x: 100, // will be random
-    y: 0,
-    size: 50,
-    speed: 2
-};
 
 // the red healthbar
 let healthBar = {
@@ -107,7 +99,7 @@ function preload() {
 */
 function setup() {
     createCanvas(1080, 720);
-    setEnemyShipTimeout(addEnemyShip, enemyShipDelay);
+    setTimeout(addEnemyShip, enemyShipDelay);
 
 }
 
@@ -284,7 +276,7 @@ function checkBulletEnemyOverlap() {
 function checkPlayerEnemyOverlap() {
     for (let enemyShip of enemyShips) {
         // Get distance from spray to the hit elements
-        const playerD = dist(playerShip.x, bullet.y, playerShip.body.x, playerShip.body.y);
+        const playerD = dist(playerShip.x, playerShip.y, enemyShip.body.x, enemyShip.body.y);
         // Check if it's an overlap
         const playerHit = (playerD < enemyShip.body.size / 2 + playerShip.body.size / 2);
         if (playerHit) {
@@ -337,7 +329,7 @@ function drawHealthBar() {
 
 }
 
-// shoots bullets as player clicks the spcaebar
+// shoots bullets as player clicks the spacebar
 function keyPressed() {
     if (keyCode === 32) {
         bullets.push(createBullets())
@@ -354,7 +346,7 @@ function addEnemyShip() {
     // constrain the delay
     enemyShipDelay = constrain(enemyShipDelay, minimumEnemyDelay, maximumEnemyDelay);
     //set timeout
-    setEnemyShipTimeout(addEnemyShip, enemyShipDelay);
+    setTimeout(addEnemyShip, enemyShipDelay);
 }
 
 
