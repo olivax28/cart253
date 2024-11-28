@@ -1,8 +1,6 @@
 /**
  * Astral Projectiles
  * Olivia Axiuk
- * 
- *(GAME DESCRIPTION HERE)
  notes:
  have timer in main game that leads to a screen (before health bar is dead)
  alien character dialogu, brings back to menu - cannot enter PLAy version of te game again (do not reset the timer)
@@ -239,10 +237,12 @@ function playGame() {
         moveEnemyShip(enemyShip);
         drawEnemyShip(enemyShip);
     }
+    checkBulletEnemyOverlap();
     drawScore();
     drawHealthBar();
     countDown();
     playGameEnd();
+
 }
 
 
@@ -270,14 +270,20 @@ function countDown() {
  * Handles the spray overlapping the targets
  */
 function checkBulletEnemyOverlap() {
-    // Get distance from spray to the hit elements
-    const enemyD = dist(bullet.x, bullet.y, enemyShip.body.x, enemyShip.body.y);
-    // Check if it's an overlap
-    const enemyHit = (enemyD < bullet.size / 2 + enemmyShip.body.size / 2);
-    if (enemyHit) {
-        // increase the score
-        score = score + 1;
+    for (let enemyShip of enemyShips) {
+        for (let bullet of bullets) {
+            // Get distance from spray to the hit elements
+            const enemyD = dist(bullet.x, bullet.y, enemyShip.body.x, enemyShip.body.y);
+            // Check if it's an overlap
+            const enemyHit = (enemyD < bullet.size / 2 + enemyShip.body.size / 2);
+            if (enemyHit) {
+                // increase the score
+                score = score + 1;
+            }
+        }
     }
+
+
 }
 
 // move the enemy ships
@@ -329,7 +335,7 @@ function keyPressed() {
 }
 
 function spawnEnemy(enemyShip) {
-    if (enemyShip.body.y >= 400) {
+    if (enemyShip.body.y == 400) {
         enemyShips.push(createEnemyShips())
 
     }
