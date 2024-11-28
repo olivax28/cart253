@@ -27,9 +27,12 @@ const playerShip = {
 let bullets = []
 let enemyShips = []
 
+//handles the enemyShip timer (inspired by Bug Squasher by Pippin Bar)
+const minimumEnemyDelay = 0.5 * 1000;
+const maximumEnemyDelay = 2 * 1000;
+let enemyShipDelay = maximumEnemyDelay;
 
-
-
+//sets the initial state
 let state = "playGame"
 
 // Has a position, size, and speed of horizontal movement as well as two levels of fill (red)
@@ -104,8 +107,7 @@ function preload() {
 */
 function setup() {
     createCanvas(1080, 720);
-    const newShip = createEnemyShips();
-    enemyShips.push(newShip);
+    setEnemyShipTimeout(addEnemyShip, enemyShipDelay);
 
 }
 
@@ -214,14 +216,6 @@ function drawTitleBoxes(titleBox) {
     pop();
 }
 
-
-
-
-
-
-
-
-
 //The main game mode
 function playGame() {
     // bullet for loop
@@ -238,6 +232,7 @@ function playGame() {
         drawEnemyShip(enemyShip);
     }
     checkBulletEnemyOverlap();
+    checkPlayerEnemyOverlap();
     drawScore();
     drawHealthBar();
     countDown();
@@ -267,7 +262,7 @@ function countDown() {
 }
 
 /**
- * Handles the spray overlapping the targets
+ * Handles the  overlapping the targets
  */
 function checkBulletEnemyOverlap() {
     for (let enemyShip of enemyShips) {
@@ -281,6 +276,22 @@ function checkBulletEnemyOverlap() {
                 score = score + 1;
             }
         }
+    }
+
+
+}
+
+function checkPlayerEnemyOverlap() {
+    for (let enemyShip of enemyShips) {
+        // Get distance from spray to the hit elements
+        const playerD = dist(playerShip.x, bullet.y, playerShip.body.x, playerShip.body.y);
+        // Check if it's an overlap
+        const playerHit = (playerD < enemyShip.body.size / 2 + playerShip.body.size / 2);
+        if (playerHit) {
+            // increase the score
+            HealthlvlWidth -= 5;
+        }
+
     }
 
 
@@ -316,7 +327,7 @@ function drawScore() {
 
 }
 
-// a red bar that gets shorter as the player hits the sad clowns
+// a red bar that gets shorter as the player hits the enemy ship
 function drawHealthBar() {
     push();
     noStroke();
@@ -334,11 +345,16 @@ function keyPressed() {
     }
 }
 
-function spawnEnemy(enemyShip) {
-    if (enemyShip.body.y == 400) {
-        enemyShips.push(createEnemyShips())
+//handles the adding of the enemy ships to the array
+function addEnemyShip() {
+    const enemyShip = createEnemyShips();
+    enemyShips.push(enemyShip);
 
-    }
+    enemyShipDelay -= random(0, 100);
+    // constrain the delay
+    enemyShipDelay = constrain(enemyShipDelay, minimumEnemyDelay, maximumEnemyDelay);
+    //set timeout
+    setEnemyShipTimeout(addEnemyShip, enemyShipDelay);
 }
 
 
