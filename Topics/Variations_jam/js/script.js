@@ -283,7 +283,7 @@ function checkPlayerEnemyOverlap() {
         const playerHit = (playerD < enemyShip.body.size / 2 + playerShip.body.size / 2);
         if (playerHit) {
             // increase the score
-            healthBar.HealthlvlWidth -= 50;
+            healthBar.HealthlvlWidth -= 10;
             const index = enemyShips.indexOf(enemyShip);
             enemyShips.splice(index, 1);
         }
@@ -304,7 +304,7 @@ function drawSpriteElements(spriteObject) {
     imageMode(CENTER);
     image(spriteObject.body.sprite, spriteObject.body.x, spriteObject.body.y);
     fill("red");
-    ellipse(spriteObject.body.x, spriteObject.body.y, spriteObject.body.size);
+    //ellipse(spriteObject.body.x, spriteObject.body.y, spriteObject.body.size);
     pop();
 }
 
