@@ -16,7 +16,7 @@ const playerShip = {
         x: 540,
         y: 630,
         sprite: undefined,
-        size: 40,
+        size: 100,
         velocity: 6,
 
     },
@@ -266,6 +266,8 @@ function checkBulletEnemyOverlap() {
             if (enemyHit) {
                 // increase the score
                 score = score + 1;
+                const index = enemyShips.indexOf(enemyShip);
+                enemyShips.splice(index, 1);
             }
         }
     }
@@ -276,12 +278,14 @@ function checkBulletEnemyOverlap() {
 function checkPlayerEnemyOverlap() {
     for (let enemyShip of enemyShips) {
         // Get distance from spray to the hit elements
-        const playerD = dist(playerShip.x, playerShip.y, enemyShip.body.x, enemyShip.body.y);
+        const playerD = dist(playerShip.body.x, playerShip.body.y, enemyShip.body.x, enemyShip.body.y);
         // Check if it's an overlap
         const playerHit = (playerD < enemyShip.body.size / 2 + playerShip.body.size / 2);
         if (playerHit) {
             // increase the score
-            HealthlvlWidth -= 5;
+            healthBar.HealthlvlWidth -= 50;
+            const index = enemyShips.indexOf(enemyShip);
+            enemyShips.splice(index, 1);
         }
 
     }
@@ -299,6 +303,8 @@ function drawSpriteElements(spriteObject) {
     push();
     imageMode(CENTER);
     image(spriteObject.body.sprite, spriteObject.body.x, spriteObject.body.y);
+    fill("red");
+    ellipse(spriteObject.body.x, spriteObject.body.y, spriteObject.body.size);
     pop();
 }
 
