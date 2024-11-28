@@ -26,6 +26,7 @@ const playerShip = {
 // The needed arrays
 let bullets = []
 let enemyShips = []
+let enemySprite = undefined
 
 //handles the enemyShip timer (inspired by Bug Squasher by Pippin Bar)
 const minimumEnemyDelay = 0.5 * 1000;
@@ -90,7 +91,7 @@ const titleBoxDefender = {
 //load in all sprites
 function preload() {
     playerShip.body.sprite = loadImage("assets/images/playerShip.PNG")
-    //enemyShip.body.sprite = loadImage("assets/images/enemyShip.PNG")
+    enemySprite = loadImage("assets/images/enemyShip.PNG")
 }
 
 
@@ -120,7 +121,7 @@ function createEnemyShips() {
         body: {
             x: random(0, width),
             y: 0,
-            //sprite: undefined,
+            sprite: enemySprite,
             size: 30,
             velocity: 2,
             fill: "#419605"
@@ -216,12 +217,11 @@ function playGame() {
         drawBullet(bullet);
     }
     drawSpriteElements(playerShip);
-    //drawSpriteElements(enemyShip);
     movePlayer();
     destroyBullet();
     for (let enemyShip of enemyShips) {
         moveEnemyShip(enemyShip);
-        drawEnemyShip(enemyShip);
+        drawSpriteElements(enemyShip);
     }
     checkBulletEnemyOverlap();
     checkPlayerEnemyOverlap();
@@ -303,8 +303,6 @@ function drawSpriteElements(spriteObject) {
     push();
     imageMode(CENTER);
     image(spriteObject.body.sprite, spriteObject.body.x, spriteObject.body.y);
-    fill("red");
-    //ellipse(spriteObject.body.x, spriteObject.body.y, spriteObject.body.size);
     pop();
 }
 
