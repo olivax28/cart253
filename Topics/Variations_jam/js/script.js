@@ -31,6 +31,14 @@ let enemySprite = undefined;
 //the background image sprite for the cutscene
 let cutsceneBG = undefined;
 
+const cutsceneText = [
+    "Pilot: Commander, are you there? Over.",
+    "...",
+    "Pilot: Is anyone out there?",
+    "The vast expanse of Space extended before him, empty and cold."
+
+]
+
 //handles the enemyShip timer (inspired by Bug Squasher by Pippin Bar)
 const minimumEnemyDelay = 0.5 * 1000;
 const maximumEnemyDelay = 2 * 1000;
@@ -89,6 +97,26 @@ const titleBoxDefender = {
     h: 80,
     fill: "#ee2525",
     state: "defenderMode"
+}
+
+const textBoxCutscene = {
+    body: {
+        x: 300,
+        y: 200,
+        w: 500,
+        h: 200,
+        fill: "#000000",
+    },
+
+    border: {
+        x: 295,
+        y: 190,
+        w: 510,
+        h: 220,
+        fill: "#FFFFFF",
+
+    }
+
 }
 
 //load in all sprites
@@ -246,6 +274,8 @@ function playGameCutscene() {
     imageMode(CENTER);
     image(cutsceneBG, width / 2, height / 2);
     pop();
+    drawTextBox(textBoxCutscene);
+
 }
 
 
@@ -402,6 +432,22 @@ function destroyBullet() {
             bullets.splice(index, 1);
         }
     }
+}
+
+//For the PlayGame cutscene texts
+//Functions draws the text boxes
+
+function drawTextBox(textBox) {
+    //border
+    push();
+    fill(textBox.border.fill);
+    rect(textBox.border.x, textBox.border.y, textBox.border.w, textBox.border.h);
+    pop();
+    // text box
+    push();
+    fill(textBox.body.fill);
+    rect(textBox.body.x, textBox.body.y, textBox.body.w, textBox.body.h);
+    pop();
 }
 
 
