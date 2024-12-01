@@ -49,7 +49,7 @@ let healthBar = {
 // the current score and its minimum for resetting purposes
 let score = 0;
 let scoreMin = 0;
-//Timer parameters
+//Timer parameters for the playGame timer which ends this version of the game
 let timer = {
     counter: 10,
     max: 10,
@@ -249,8 +249,18 @@ function moveBullet(bullet) {
 
 }
 
+//countdown until playGame displays the end "cutscene"
+
 function countDown() {
-    timer.counter -= 1 / (frameRate());
+    timer.counter -= 0.01;
+
+}
+
+//determines when the timer end, display the cutscene
+function playGameEnd() {
+    if (floor(timer.counter) == 0) {
+        state = "title"
+    }
 }
 
 /**
@@ -378,12 +388,6 @@ function destroyBullet() {
     }
 }
 
-function playGameEnd() {
-    if (floor(timer.counter) == 0) {
-        state = "title"
-        console.log(timer.counter);
-    }
-}
 
 
 
