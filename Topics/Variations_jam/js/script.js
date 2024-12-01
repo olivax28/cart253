@@ -24,9 +24,12 @@ const playerShip = {
 
 
 // The needed arrays
-let bullets = []
-let enemyShips = []
-let enemySprite = undefined
+let bullets = [];
+let enemyShips = [];
+let enemySprite = undefined;
+
+//the background image sprite for the cutscene
+let cutsceneBG = undefined;
 
 //handles the enemyShip timer (inspired by Bug Squasher by Pippin Bar)
 const minimumEnemyDelay = 0.5 * 1000;
@@ -34,7 +37,7 @@ const maximumEnemyDelay = 2 * 1000;
 let enemyShipDelay = maximumEnemyDelay;
 
 //sets the initial state
-let state = "playGame"
+let state = "playGameCutscene"
 
 // the red healthbar
 let healthBar = {
@@ -92,6 +95,7 @@ const titleBoxDefender = {
 function preload() {
     playerShip.body.sprite = loadImage("assets/images/playerShip.PNG")
     enemySprite = loadImage("assets/images/enemyShip.PNG")
+    cutsceneBG = loadImage("assets/images/cutsceneBG.PNG")
 }
 
 
@@ -150,6 +154,9 @@ function draw() {
     }
     if (state === "defenderMode") {
         defenderMode();
+    }
+    if (state === "playGameCutscene") {
+        playGameCutscene();
     }
 }
 
@@ -232,6 +239,15 @@ function playGame() {
 
 }
 
+//the Cutscene which interrupts the "playGame" mode
+function playGameCutscene() {
+    background("#214222");
+    push();
+    imageMode(CENTER);
+    image(cutsceneBG, width / 2, height / 2);
+    pop();
+}
+
 
 // moves the player ship
 function movePlayer() {
@@ -259,7 +275,7 @@ function countDown() {
 //determines when the timer end, display the cutscene
 function playGameEnd() {
     if (floor(timer.counter) == 0) {
-        state = "title"
+        state = "playGameCutscene"
     }
 }
 
