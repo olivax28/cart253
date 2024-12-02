@@ -440,7 +440,7 @@ function destroyBullet() {
 
 //For the PlayGame cutscene texts
 //Functions draws the text boxes
-function drawTextBox(textBox) {
+function drawTextBox(textBox, textArray) {
     //border
     push();
     fill(textBox.border.fill);
@@ -456,7 +456,7 @@ function drawTextBox(textBox) {
     textSize(20);
     textAlign(LEFT);
     textFont('Courier New');
-    text(cutsceneText[dialogueIndex], textBox.body.x + 5, textBox.body.y + 5, textBox.body.w, textBox.body.h)
+    text(textArray[dialogueIndex], textBox.body.x + 5, textBox.body.y + 5, textBox.body.w, textBox.body.h)
     pop();
 }
 
@@ -467,7 +467,7 @@ function checkDialogueTimer() {
         setTimeout(showTheTextBox, 1000);
     }
     if (showDialogueBox == true) {
-        drawTextBox(textBoxCutscene);
+        drawTextBox(textBoxCutscene, cutsceneText);
     }
 }
 
