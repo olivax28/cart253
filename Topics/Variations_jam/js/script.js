@@ -35,7 +35,8 @@ const cutsceneText = [
     "Pilot: Commander, are you there? Over.",
     "...",
     "Pilot: Is anyone out there?",
-    "The vast expanse of Space extended before him, empty and cold."
+    "The vast expanse of Space extended before him, empty and cold.",
+    "If only he'd have known the STORY."
 ]
 
 let dialogueIndex = 0;
@@ -47,7 +48,7 @@ const maximumEnemyDelay = 2 * 1000;
 let enemyShipDelay = maximumEnemyDelay;
 
 //sets the initial state
-let state = "playGameCutscene"
+let state = "playGame"
 
 // the red healthbar
 let healthBar = {
@@ -228,11 +229,10 @@ function title() {
 
 function gamePick(titleBox) {
     // Get distance from spray to the hit elements
-    const titleBoxArea = titleBox.width * titleBox.height;
-    const playerClickD = dist(mouseX, mouseY, titleBoxArea);
+    const mouseD = dist(mouseX, mouseY, titleBox.w, titleBox.h);
     // Check if it's an overlap
-    const playerChoose = (playerClickD < mouseX, mouseY + titleBoxArea);
-    if (playerChoose && mouseIsPressed()) {
+    const mouseGameModeOverlap = (mouseD < titleBox.w, titleBox.h + mouseX, mouseY);
+    if (mouseGameModeOverlap && mouseIsPressed) {
         state = titleBox.state
     }
 }
@@ -270,9 +270,19 @@ function playGame() {
 
 }
 
+//Story Mode of the Game
+
+function storyMode() {
+    background("#214222");
+}
+
+function defenderMode() {
+    background("#ff00ef");
+}
+
 //the Cutscene which interrupts the "playGame" mode
 function playGameCutscene() {
-    background("#214222");
+    background("#ff0000");
     push();
     imageMode(CENTER);
     image(cutsceneBG, width / 2, height / 2);
