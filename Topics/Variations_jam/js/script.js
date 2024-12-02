@@ -36,8 +36,10 @@ const cutsceneText = [
     "...",
     "Pilot: Is anyone out there?",
     "The vast expanse of Space extended before him, empty and cold."
-
 ]
+
+let dialogueIndex = 0;
+let showDialogueBox = false;
 
 //handles the enemyShip timer (inspired by Bug Squasher by Pippin Bar)
 const minimumEnemyDelay = 0.5 * 1000;
@@ -67,6 +69,7 @@ let timer = {
     min: 0,
 
 };
+
 
 const titleBoxPlay = {
     x: 300,
@@ -274,7 +277,8 @@ function playGameCutscene() {
     imageMode(CENTER);
     image(cutsceneBG, width / 2, height / 2);
     pop();
-    drawTextBox(textBoxCutscene);
+    checkDialogueTimer();
+    //mousePressed();
 
 }
 
@@ -448,6 +452,35 @@ function drawTextBox(textBox) {
     fill(textBox.body.fill);
     rect(textBox.body.x, textBox.body.y, textBox.body.w, textBox.body.h);
     pop();
+    push();
+    fill(255);
+    textSize(18);
+    textAlign(LEFT);
+    text(cutsceneText[dialogueIndex], textBox.body.x, textBox.body.y, textBox.body.w, textBox.body.h)
+    pop();
+}
+
+
+function checkDialogueTimer() {
+    if (showDialogueBox == true) {
+        drawTextBox(textBoxCutscene);
+    }
+}
+
+function showTheTextBox() {
+    showDialogueBox = true;
+}
+
+function mousePressed() {
+    if (state === "playGameCutscene") {
+        setTimeout(showTheTextBox, 1000);
+    }
+    if (state === "playGameCutscene" && showDialogueBox === true) {
+        dialogueIndex++;
+        if (dialogueIndex === cutsceneText.length) {
+            state = "title";
+        }
+    }
 }
 
 
