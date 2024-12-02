@@ -221,15 +221,18 @@ function title() {
 }
 
 
+
 function gamePick(titleBox) {
-    // Get distance from spray to the hit elements
-    const mouseD = dist(mouseX, mouseY, titleBox.w, titleBox.h);
-    // Check if it's an overlap
-    const mouseGameModeOverlap = (mouseD < titleBox.w, titleBox.h + mouseX, mouseY);
+    const mouseGameModeOverlap = mouseX > titleBox.x &&
+        mouseX < titleBox.x + titleBox.w &&
+        mouseY > titleBox.y &&
+        mouseY < titleBox.y + titleBox.h;
+
     if (mouseGameModeOverlap && mouseIsPressed) {
         state = titleBox.state
     }
 }
+
 
 //functions for the title Screen
 
