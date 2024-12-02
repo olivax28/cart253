@@ -199,22 +199,6 @@ function title() {
     textAlign(CENTER, CENTER)
     background("#000000");
 
-    push();
-    fill("#");
-    text("Astral Projectiles", width / 2, height / 2)
-    pop();
-
-    push();
-    fill("#");
-    text("Click to Begin", width / 2, 300)
-    pop();
-
-
-    push();
-    fill("#");
-    text("Click to Begin", width / 2, 300)
-    pop();
-
     drawTitleBoxes(titleBoxPlay);
 
     drawTitleBoxes(titleBoxStory);
@@ -224,6 +208,16 @@ function title() {
     gamePick(titleBoxPlay);
     gamePick(titleBoxDefender);
     gamePick(titleBoxStory);
+
+    push();
+    fill("#");
+    text("Astral Projectiles", width / 2, height / 2)
+    pop();
+
+    push();
+    fill("#");
+    text("Click to Begin", width / 2, 300)
+    pop();
 }
 
 
