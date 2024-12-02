@@ -47,7 +47,7 @@ const maximumEnemyDelay = 2 * 1000;
 let enemyShipDelay = maximumEnemyDelay;
 
 //sets the initial state
-let state = "playGameCutscene"
+let state = "playGame"
 
 // the red healthbar
 let healthBar = {
@@ -278,7 +278,7 @@ function playGameCutscene() {
     image(cutsceneBG, width / 2, height / 2);
     pop();
     checkDialogueTimer();
-    //mousePressed();
+
 
 }
 
@@ -462,6 +462,9 @@ function drawTextBox(textBox) {
 
 
 function checkDialogueTimer() {
+    if (state === "playGameCutscene") {
+        setTimeout(showTheTextBox, 1000);
+    }
     if (showDialogueBox == true) {
         drawTextBox(textBoxCutscene);
     }
@@ -472,9 +475,6 @@ function showTheTextBox() {
 }
 
 function mousePressed() {
-    if (state === "playGameCutscene") {
-        setTimeout(showTheTextBox, 1000);
-    }
     if (state === "playGameCutscene" && showDialogueBox === true) {
         dialogueIndex++;
         if (dialogueIndex === cutsceneText.length) {
