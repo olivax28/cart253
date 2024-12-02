@@ -48,7 +48,7 @@ const maximumEnemyDelay = 2 * 1000;
 let enemyShipDelay = maximumEnemyDelay;
 
 //sets the initial state
-let state = "playGame"
+let state = "title"
 
 // the red healthbar
 let healthBar = {
