@@ -47,7 +47,7 @@ const maximumEnemyDelay = 2 * 1000;
 let enemyShipDelay = maximumEnemyDelay;
 
 //sets the initial state
-let state = "playGame"
+let state = "playGameCutscene"
 
 // the red healthbar
 let healthBar = {
@@ -440,7 +440,6 @@ function destroyBullet() {
 
 //For the PlayGame cutscene texts
 //Functions draws the text boxes
-
 function drawTextBox(textBox) {
     //border
     push();
@@ -453,14 +452,16 @@ function drawTextBox(textBox) {
     rect(textBox.body.x, textBox.body.y, textBox.body.w, textBox.body.h);
     pop();
     push();
-    fill(255);
-    textSize(18);
+    fill("#66ff66");
+    textSize(20);
     textAlign(LEFT);
-    text(cutsceneText[dialogueIndex], textBox.body.x, textBox.body.y, textBox.body.w, textBox.body.h)
+    textFont('Courier New');
+    text(cutsceneText[dialogueIndex], textBox.body.x + 5, textBox.body.y + 5, textBox.body.w, textBox.body.h)
     pop();
 }
 
 
+//Delays the appearance of the dialogue box
 function checkDialogueTimer() {
     if (state === "playGameCutscene") {
         setTimeout(showTheTextBox, 1000);
@@ -470,10 +471,12 @@ function checkDialogueTimer() {
     }
 }
 
+//handles the showing of the text box
 function showTheTextBox() {
     showDialogueBox = true;
 }
 
+//cycle through the text box array (among other things)
 function mousePressed() {
     if (state === "playGameCutscene" && showDialogueBox === true) {
         dialogueIndex++;
