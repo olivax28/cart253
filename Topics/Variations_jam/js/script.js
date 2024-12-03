@@ -229,7 +229,7 @@ function title() {
 }
 
 
-
+// detects the overlap of the mouse over the title box 
 function gamePick(titleBox) {
     const mouseGameModeOverlap = mouseX > titleBox.x &&
         mouseX < titleBox.x + titleBox.w &&
@@ -519,6 +519,7 @@ function mousePressed() {
         dialogueIndex++;
         if (dialogueIndex === cutsceneText.length) {
             state = "title";
+            console.log(state)
         }
     }
 }
