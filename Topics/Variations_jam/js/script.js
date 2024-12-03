@@ -332,7 +332,19 @@ function storyCutscene() {
 
 
 function defenderMode() {
-    background("#ff00ef");
+    background("black");
+    for (let bullet of bullets) {
+        moveBullet(bullet);
+        drawBullet(bullet);
+    }
+    drawDefenderText();
+    drawSpriteElements(playerShip);
+    destroyBullet();
+    checkBulletEnemyOverlap();
+    checkPlayerEnemyOverlap();
+    movePlayerDefender();
+    drawScore();
+    drawHealthBar();
 }
 
 
@@ -346,6 +358,32 @@ function movePlayer() {
         playerShip.body.x += playerShip.body.velocity;
     }
     playerShip.body.x = constrain(playerShip.body.x, 0, width);
+}
+
+
+// moves the player ship in the defender version, moved using up and downa rrow keys on x and y axis
+function movePlayerDefender() {
+    if (keyIsDown(LEFT_ARROW)) {
+        playerShip.body.x -= playerShip.body.velocity;
+    } else if (keyIsDown(RIGHT_ARROW)) {
+        playerShip.body.x += playerShip.body.velocity;
+    }
+    playerShip.body.x = constrain(playerShip.body.x, 0, width);
+    if (keyIsDown(UP_ARROW)) {
+        playerShip.body.y -= playerShip.body.velocity;
+    } else if (keyIsDown(DOWN_ARROW)) {
+        playerShip.body.y += playerShip.body.velocity;
+    }
+    playerShip.body.y = constrain(playerShip.body.y, 0, height);
+}
+
+function drawDefenderText() {
+    let defenderfill = map(playerShip.body.y, 500, 0, 0, 255);
+    push();
+    fill(defenderfill);
+    text("There's no one left", playerShip.body.x - 145, playerShip.body.y + 100);
+    pop();
+
 }
 
 //Moves the bullet
