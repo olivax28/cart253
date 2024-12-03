@@ -67,11 +67,8 @@ let healthBar = {
 let score = 0;
 let scoreMin = 0;
 //Timer parameters for the playGame timer which ends this version of the game
-let timer = {
+let timer01 = {
     counter: 10,
-    max: 10,
-    min: 0,
-
 };
 
 
@@ -262,8 +259,8 @@ function playGame() {
     checkPlayerEnemyOverlap();
     drawScore();
     drawHealthBar();
-    countDown();
-    playGameEnd();
+    countDown(timer01);
+    playGameEnd(timer01);
 
 }
 
@@ -298,7 +295,7 @@ function storyMode() {
     checkPlayerEnemyOverlap();
     drawScore();
     drawHealthBar();
-    countDown();
+    //countDown();
     // playGameEnd();
 }
 
@@ -327,14 +324,14 @@ function moveBullet(bullet) {
 
 //countdown until playGame displays the end "cutscene"
 
-function countDown() {
+function countDown(timer) {
     timer.counter -= 0.01;
 
 }
 
 //determines when the timer end, display the cutscene
-function playGameEnd() {
-    if (floor(timer.counter) == 0) {
+function playGameEnd(timer) {
+    if (floor(timer.counter) === 0) {
         state = "playGameCutscene"
     }
 }
