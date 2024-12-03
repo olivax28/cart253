@@ -31,6 +31,9 @@ let enemySprite = undefined;
 //the background image sprite for the cutscene
 let cutsceneBG = undefined;
 
+//The titlescreen image
+let titleScreenIMG = undefined;
+
 const cutsceneText = [
     "Pilot: Commander, are you there? Over.",
     "...",
@@ -134,6 +137,17 @@ const textBoxCutscene = {
 
 }
 
+//the inifnity symbol which replaced the healthabr in defender moder
+const infinitySymbol = {
+    body: {
+        x: 540,
+        y: 70,
+        sprite: undefined,
+    }
+
+}
+
+
 //load in all sprites
 function preload() {
     //load story mode dialogue data
@@ -141,6 +155,8 @@ function preload() {
     playerShip.body.sprite = loadImage("assets/images/playerShip.PNG")
     enemySprite = loadImage("assets/images/enemyShip.PNG")
     cutsceneBG = loadImage("assets/images/cutsceneBG.PNG")
+    infinitySymbol.body.sprite = loadImage("assets/images/infinity.PNG")
+    titleScreenIMG = loadImage("assets/images/titleScreen.PNG")
 }
 
 
@@ -214,6 +230,10 @@ function title() {
     textSize(32);
     textAlign(LEFT, LEFT)
     background("#000000");
+    push();
+    imageMode(CENTER);
+    image(titleScreenIMG, width / 2, height / 2);
+    pop();
 
     drawTitleBoxes(titleBoxPlay);
 
@@ -337,15 +357,13 @@ function defenderMode() {
         moveBullet(bullet);
         drawBullet(bullet);
     }
+    drawSpriteElements(infinitySymbol);
     drawDefenderText();
     drawSpriteElements(playerShip);
     destroyBullet();
-    checkBulletEnemyOverlap();
-    checkPlayerEnemyOverlap();
     movePlayerDefender();
     // displays an error instead of the score
     drawScore("Err");
-    drawHealthBar();
 }
 
 
