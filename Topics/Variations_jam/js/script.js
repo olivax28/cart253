@@ -181,6 +181,8 @@ function createBullets() {
     return bullet
 }
 
+
+
 function createEnemyShips() {
     let enemyShip = {
         body: {
@@ -397,7 +399,8 @@ function drawDefenderText() {
     let defenderfill = map(playerShip.body.y, 500, 0, 0, 255);
     push();
     fill(defenderfill);
-    text("There's no one left", playerShip.body.x - 145, playerShip.body.y + 100);
+    textFont('Courier New');
+    text("Pilot: There's no one left", playerShip.body.x - 240, playerShip.body.y + 200);
     pop();
 
 }
