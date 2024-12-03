@@ -196,7 +196,7 @@ function draw() {
 function title() {
     //sets size and alignment of the Title text 
     textSize(32);
-    textAlign(CENTER, CENTER)
+    textAlign(LEFT, LEFT)
     background("#000000");
 
     drawTitleBoxes(titleBoxPlay);
@@ -212,11 +212,6 @@ function title() {
     push();
     fill("#");
     text("Astral Projectiles", width / 2, height / 2)
-    pop();
-
-    push();
-    fill("#");
-    text("Click to Begin", width / 2, 300)
     pop();
 }
 
@@ -267,16 +262,6 @@ function playGame() {
 
 }
 
-//Story Mode of the Game
-
-function storyMode() {
-    background("#214222");
-}
-
-function defenderMode() {
-    background("#ff00ef");
-}
-
 //the Cutscene which interrupts the "playGame" mode
 function playGameCutscene() {
     background("#ff0000");
@@ -286,8 +271,37 @@ function playGameCutscene() {
     pop();
     checkDialogueTimer();
 
-
 }
+
+//Story Mode of the Game
+
+function storyMode() {
+    background("#214222");
+    // bullet for loop
+    for (let bullet of bullets) {
+        moveBullet(bullet);
+        drawBullet(bullet);
+    }
+    drawSpriteElements(playerShip);
+    movePlayer();
+    destroyBullet();
+    for (let enemyShip of enemyShips) {
+        moveEnemyShip(enemyShip);
+        drawSpriteElements(enemyShip);
+    }
+    checkBulletEnemyOverlap();
+    checkPlayerEnemyOverlap();
+    drawScore();
+    drawHealthBar();
+    // countDown();
+    // playGameEnd();
+}
+
+function defenderMode() {
+    background("#ff00ef");
+}
+
+
 
 
 // moves the player ship
