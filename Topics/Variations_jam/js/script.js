@@ -51,7 +51,7 @@ const maximumEnemyDelay = 2 * 1000;
 let enemyShipDelay = maximumEnemyDelay;
 
 //sets the initial state
-let state = "title"
+let state = "storyCutscene"
 
 // the red healthbar
 let healthBar = {
@@ -203,6 +203,9 @@ function draw() {
     if (state === "playGameCutscene") {
         playGameCutscene();
     }
+    if (state === "storyCutscene") {
+        storyCutscene();
+    }
 }
 
 
@@ -283,7 +286,6 @@ function playGameCutscene() {
     image(cutsceneBG, width / 2, height / 2);
     pop();
     checkDialogueTimer("playGameCutscene", cutsceneText);
-
 }
 
 //Story Mode of the Game
@@ -307,9 +309,27 @@ function storyMode() {
     drawScore();
     drawHealthBar();
     countDown(timer02);
-    //const storyDialogue = .storyDialogue01;
-    playScene("playGameCutscene", storyDialogue);
+    const Dialogue01 = storyDialogue.Description;
+    playScene("storyCutscene", Dialogue01);
 }
+
+
+//the Cutscene which interrupts the "playGame" mode
+function storyCutscene() {
+    background("#ff0000");
+    push();
+    imageMode(CENTER);
+    image(cutsceneBG, width / 2, height / 2);
+    pop();
+    // const Dialogue01 = storyDialogue.Description;
+    const Dialogue01 = ["testing"]
+    checkDialogueTimer("storyCutscene", Dialogue01);
+    push();
+    pop();
+
+
+}
+
 
 function defenderMode() {
     background("#ff00ef");
@@ -520,6 +540,14 @@ function mousePressed() {
         if (dialogueIndex === cutsceneText.length) {
             state = "title";
             console.log(state)
+        }
+    }
+
+    if (state === "storyCutscene" && showDialogueBox === true) {
+        dialogueIndex++;
+        if (dialogueIndex === Dialogue01.length) {
+            state = "storyMode";
+
         }
     }
 }
