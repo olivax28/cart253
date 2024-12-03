@@ -271,7 +271,7 @@ function playGame() {
     }
     checkBulletEnemyOverlap();
     checkPlayerEnemyOverlap();
-    drawScore();
+    drawScore(score);
     drawHealthBar();
     countDown(timer01);
     playScene(timer01, "playGameCutscene");
@@ -306,7 +306,7 @@ function storyMode() {
     }
     checkBulletEnemyOverlap();
     checkPlayerEnemyOverlap();
-    drawScore();
+    drawScore(score);
     drawHealthBar();
     countDown(timer02);
     const Dialogue01 = storyDialogue.Description;
@@ -343,7 +343,8 @@ function defenderMode() {
     checkBulletEnemyOverlap();
     checkPlayerEnemyOverlap();
     movePlayerDefender();
-    drawScore();
+    // displays an error instead of the score
+    drawScore("Err");
     drawHealthBar();
 }
 
@@ -467,12 +468,13 @@ function drawEnemyShip(enemyShip) {
     pop();
 }
 /// displays the score in top right 
-function drawScore() {
+function drawScore(scoreText) {
     push();
     textAlign(RIGHT, TOP);
+    textFont('Courier New');
     textSize(100);
-    fill("#ff9300");
-    text(score, width, 0);
+    fill("#37cf3c");
+    text(scoreText, width, 0);
     pop();
 
 }
