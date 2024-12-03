@@ -260,7 +260,7 @@ function playGame() {
     drawScore();
     drawHealthBar();
     countDown(timer01);
-    playScene(timer01);
+    playScene(timer01, "playGameCutscene");
 
 }
 
@@ -330,9 +330,9 @@ function countDown(timer) {
 }
 
 //determines when the timer end, display the cutscene
-function playScene(timer) {
+function playScene(timer, scene) {
     if (floor(timer.counter) === 0) {
-        state = "playGameCutscene"
+        state = scene
     }
 }
 
