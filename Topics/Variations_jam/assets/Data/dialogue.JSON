@@ -1,0 +1,21 @@
+{
+    "Story Mode Dialogue": "Dialogue that will appear in the story mode version of Astral projectiles",
+    "storyDialogue": [
+        {
+            "storyDialogue01": [
+                "Pilot: Year is 1989, December 12th. Time is 1 PM.",
+                "...",
+                "Pilot: Surrounded by unknown objects, UFOs.",
+                "Pilot: Commander?",
+                "Oh no."
+            ],
+            "storyDialogue02": [
+                "Commander: He won't stop."
+            ],
+            "storyDialogue03": [
+                "Commander:...",
+                "Commander: Goodbye."
+            ]
+        }
+    ]
+}

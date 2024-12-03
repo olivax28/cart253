@@ -39,6 +39,9 @@ const cutsceneText = [
     "If only he'd have known the STORY."
 ]
 
+
+let storyDialogue = undefined;
+
 let dialogueIndex = 0;
 let showDialogueBox = false;
 
@@ -125,6 +128,8 @@ const textBoxCutscene = {
 
 //load in all sprites
 function preload() {
+    //load story mode dialogue data
+    storyDialogue = loadJSON("assets/data/dialogue.JSON")
     playerShip.body.sprite = loadImage("assets/images/playerShip.PNG")
     enemySprite = loadImage("assets/images/enemyShip.PNG")
     cutsceneBG = loadImage("assets/images/cutsceneBG.PNG")
@@ -293,7 +298,7 @@ function storyMode() {
     checkPlayerEnemyOverlap();
     drawScore();
     drawHealthBar();
-    // countDown();
+    countDown();
     // playGameEnd();
 }
 
@@ -335,7 +340,7 @@ function playGameEnd() {
 }
 
 /**
- * Handles the  overlapping the targets
+ * Handles the  overlapping the player and enemy elements
  */
 function checkBulletEnemyOverlap() {
     for (let enemyShip of enemyShips) {
@@ -347,6 +352,7 @@ function checkBulletEnemyOverlap() {
             if (enemyHit) {
                 // increase the score
                 score = score + 1;
+                //makes the ship disappear
                 const index = enemyShips.indexOf(enemyShip);
                 enemyShips.splice(index, 1);
             }
@@ -484,6 +490,7 @@ function drawTextBox(textBox, textArray) {
 
 //Delays the appearance of the dialogue box
 function checkDialogueTimer() {
+    //dialogue appearance for the play game custscene
     if (state === "playGameCutscene") {
         setTimeout(showTheTextBox, 1000);
     }
