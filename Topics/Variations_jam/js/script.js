@@ -66,9 +66,20 @@ let healthBar = {
 // the current score and its minimum for resetting purposes
 let score = 0;
 let scoreMin = 0;
-//Timer parameters for the playGame timer which ends this version of the game
+//Timer parameters for the different game timer which call the custscenes\
+// for play game
 let timer01 = {
     counter: 10,
+};
+//for story mode
+let timer02 = {
+    counter: 5,
+};
+let timer03 = {
+    counter: 10,
+};
+let timer04 = {
+    counter: 30,
 };
 
 
@@ -271,7 +282,7 @@ function playGameCutscene() {
     imageMode(CENTER);
     image(cutsceneBG, width / 2, height / 2);
     pop();
-    checkDialogueTimer();
+    checkDialogueTimer("playGameCutscene", cutsceneText);
 
 }
 
@@ -295,8 +306,9 @@ function storyMode() {
     checkPlayerEnemyOverlap();
     drawScore();
     drawHealthBar();
-    //countDown();
-    // playGameEnd();
+    countDown(timer02);
+    const storyDialogue = storyDialogue.storyDialogue01;
+    playGameEnd("playGameCutscene", storyDialogue);
 }
 
 function defenderMode() {
@@ -486,13 +498,13 @@ function drawTextBox(textBox, textArray) {
 
 
 //Delays the appearance of the dialogue box
-function checkDialogueTimer() {
+function checkDialogueTimer(scene, dialogue) {
     //dialogue appearance for the play game custscene
-    if (state === "playGameCutscene") {
+    if (state === scene) {
         setTimeout(showTheTextBox, 1000);
     }
     if (showDialogueBox == true) {
-        drawTextBox(textBoxCutscene, cutsceneText);
+        drawTextBox(textBoxCutscene, dialogue);
     }
 }
 
