@@ -60,7 +60,7 @@ let state = "title"
 let healthBar = {
     x: 400,
     y: 10,
-    HealthlvlWidth: 300,
+    healthlvlWidth: 300,
     maxWidth: 300,
     h: 30,
     color: "#ff1b1b"
@@ -237,11 +237,11 @@ function title() {
     image(titleScreenIMG, width / 2, height / 2);
     pop();
 
-    drawTitleBoxes(titleBoxPlay);
+    // drawTitleBoxes(titleBoxPlay);
 
-    drawTitleBoxes(titleBoxStory);
+    // drawTitleBoxes(titleBoxStory);
 
-    drawTitleBoxes(titleBoxDefender);
+    // drawTitleBoxes(titleBoxDefender);
 
     gamePick(titleBoxPlay);
     gamePick(titleBoxDefender);
@@ -264,13 +264,13 @@ function gamePick(titleBox) {
 
 //functions for the title Screen
 
-function drawTitleBoxes(titleBox) {
-    push();
-    noStroke();
-    fill(titleBox.fill);
-    rect(titleBox.x, titleBox.y, titleBox.w, titleBox.h);
-    pop();
-}
+// function drawTitleBoxes(titleBox) {
+//     push();
+//     noStroke();
+//     fill(titleBox.fill);
+//     rect(titleBox.x, titleBox.y, titleBox.w, titleBox.h);
+//     pop();
+// }
 
 //The main game mode
 function playGame() {
@@ -364,8 +364,6 @@ function defenderMode() {
 }
 
 
-
-
 // moves the player ship
 function movePlayer() {
     if (keyIsDown(LEFT_ARROW)) {
@@ -455,8 +453,8 @@ function checkPlayerEnemyOverlap() {
         const playerHit = (playerD < enemyShip.body.size / 2 + playerShip.body.size / 2);
         if (playerHit) {
             // increase the score
-            healthBar.HealthlvlWidth -= 10;
-            healthBar.HealthlvlWidth = constrain(healthBar.HealthlvlWidth, 0, healthBar.HealthlvlWidth);
+            healthBar.healthlvlWidth -= 10;
+            healthBar.healthlvlWidth = constrain(healthBar.healthlvlWidth, 0, healthBar.healthlvlWidth);
             const index = enemyShips.indexOf(enemyShip);
             enemyShips.splice(index, 1);
         }
@@ -479,6 +477,7 @@ function drawSpriteElements(spriteObject) {
     pop();
 }
 
+//draws the UFOa
 function drawEnemyShip(enemyShip) {
     push();
     fill(enemyShip.body.fill)
@@ -502,7 +501,7 @@ function drawHealthBar() {
     push();
     noStroke();
     fill(healthBar.color);
-    rect(healthBar.x, healthBar.y, healthBar.HealthlvlWidth, healthBar.h);
+    rect(healthBar.x, healthBar.y, healthBar.healthlvlWidth, healthBar.h);
     pop();
 
 }
