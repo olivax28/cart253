@@ -307,8 +307,8 @@ function storyMode() {
     drawScore();
     drawHealthBar();
     countDown(timer02);
-    const storyDialogue = storyDialogue.storyDialogue01;
-    playGameEnd("playGameCutscene", storyDialogue);
+    //const storyDialogue = .storyDialogue01;
+    playScene("playGameCutscene", storyDialogue);
 }
 
 function defenderMode() {
