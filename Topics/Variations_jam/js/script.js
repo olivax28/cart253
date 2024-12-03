@@ -244,11 +244,6 @@ function title() {
     gamePick(titleBoxPlay);
     gamePick(titleBoxDefender);
     gamePick(titleBoxStory);
-
-    push();
-    fill("#");
-    text("Astral Projectiles", width / 2, height / 2)
-    pop();
 }
 
 
@@ -396,6 +391,8 @@ function movePlayerDefender() {
     playerShip.body.y = constrain(playerShip.body.y, 0, height);
 }
 
+
+//the text that is hidden under the ship in defender mode, mapped to the Y placement of the ship
 function drawDefenderText() {
     let defenderfill = map(playerShip.body.y, 500, 0, 0, 255);
     push();
@@ -412,7 +409,6 @@ function moveBullet(bullet) {
 }
 
 //countdown until playGame displays the end "cutscene"
-
 function countDown(timer) {
     timer.counter -= 0.01;
 
@@ -457,6 +453,7 @@ function checkPlayerEnemyOverlap() {
         if (playerHit) {
             // increase the score
             healthBar.HealthlvlWidth -= 10;
+            healthBar.HealthlvlWidth = constrain(healthBar.HealthlvlWidth, 0, healthBar.HealthlvlWidth);
             const index = enemyShips.indexOf(enemyShip);
             enemyShips.splice(index, 1);
         }
