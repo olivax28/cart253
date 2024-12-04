@@ -314,7 +314,6 @@ function storyMode() {
     drawScore(score);
     drawHealthBar();
     countDown(storyTimer);
-    // const Dialogue01 = storyDialogue.Description;
     playScene(storyTimer, "storyCutscene");
 }
 
