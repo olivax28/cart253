@@ -439,7 +439,7 @@ function checkPlayerEnemyOverlap() {
         const playerHit = (playerD < enemyShip.body.size / 2 + playerShip.body.size / 2);
         if (playerHit) {
             // increase the score
-            healthBar.healthlvlWidth -= 10;
+            healthBar.healthlvlWidth -= 20;
             // constrains enemy ship
             healthBar.healthlvlWidth = constrain(healthBar.healthlvlWidth, 0, healthBar.healthlvlWidth);
             //removes the hit UFO from the enemy ship array
