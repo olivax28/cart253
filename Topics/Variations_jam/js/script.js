@@ -594,7 +594,6 @@ function mousePressed() {
             if (sceneIndex === storyDialogue.Scenes.length) {
                 // at the end of all dialogue, return to the title screen
                 state = "title";
-                console.log(state);
             }
             else {
                 dialogueIndex = 0;
