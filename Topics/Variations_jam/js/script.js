@@ -140,6 +140,12 @@ const textBoxCutscene = {
 
 }
 
+//strings of text for defender mode
+
+const defenderString01 = "Pilot: There's no one left";
+
+const defenderString02 = "Pilot: There's nowhere to go.";
+
 //the inifnity symbol which replaced the healthabr in defender moder
 const infinitySymbol = {
     body: {
@@ -344,7 +350,8 @@ function defenderMode() {
         drawBullet(bullet);
     }
     drawSpriteElements(infinitySymbol);
-    drawDefenderText();
+    drawDefenderText(playerShip.body.x, defenderString02);
+    drawDefenderText(playerShip.body.y, defenderString01);
     drawSpriteElements(playerShip);
     destroyBullet();
     movePlayerDefender();
@@ -381,13 +388,14 @@ function movePlayerDefender() {
 }
 
 
-//the text that is hidden under the ship in defender mode, mapped to the Y placement of the ship
-function drawDefenderText() {
-    let defenderfill = map(playerShip.body.y, 500, 0, 0, 255);
+//the text that is hidden under the ship in defender mode, mapped to the x and Y placement of the ship, Wasn't originally going to keep them overlapping, but I kind of like that "there's nowhere to go" is harder to decipher
+//messagesa re revealed at top of the canvas and at bottom left
+function drawDefenderText(shipCoord, string) {
+    let defenderfill = map(shipCoord, 500, 0, 0, 255);
     push();
     fill(defenderfill);
     textFont('Courier New');
-    text("Pilot: There's no one left", playerShip.body.x - 240, playerShip.body.y + 200);
+    text(string, playerShip.body.x - 240, playerShip.body.y + 200);
     pop();
 
 }
@@ -434,6 +442,7 @@ function checkBulletEnemyOverlap() {
 
 }
 
+// calculates if the enemy overlaps the player and the player takes damage
 function checkPlayerEnemyOverlap() {
     for (let enemyShip of enemyShips) {
         // Get distance from spray to the hit elements
