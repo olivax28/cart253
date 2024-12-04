@@ -48,6 +48,7 @@ const cutsceneText = [
 
 let storyDialogue = undefined;
 
+let sceneIndex = 0;
 let dialogueIndex = 0;
 let showDialogueBox = false;
 
@@ -77,6 +78,11 @@ let scoreMin = 0;
 let timer01 = {
     counter: 10,
 };
+
+let storyTimer = {
+    counter: undefined
+};
+
 //for story mode
 let timer02 = {
     counter: 5,
@@ -176,6 +182,7 @@ function setup() {
     createCanvas(1080, 720);
     setTimeout(addEnemyShip, enemyShipDelay);
 
+    storyTimer.counter = storyDialogue.Scenes[sceneIndex].Delay;
 }
 
 //creates the bullet elements that appear at the player's location
@@ -320,9 +327,9 @@ function storyMode() {
     checkPlayerEnemyOverlap();
     drawScore(score);
     drawHealthBar();
-    countDown(timer02);
-    const Dialogue01 = storyDialogue.Description;
-    playScene("storyCutscene", Dialogue01);
+    countDown(storyTimer);
+    // const Dialogue01 = storyDialogue.Description;
+    playScene(storyTimer, "storyCutscene");
 }
 
 
@@ -334,8 +341,8 @@ function storyCutscene() {
     image(cutsceneBG, width / 2, height / 2);
     pop();
     // const Dialogue01 = storyDialogue.Description;
-    const Dialogue01 = ["testing"]
-    checkDialogueTimer("storyCutscene", Dialogue01);
+    const dialogArray = storyDialogue.Scenes[sceneIndex].Dialogue;
+    checkDialogueTimer("storyCutscene", dialogArray);
     push();
     pop();
 
@@ -415,7 +422,7 @@ function countDown(timer) {
 //determines when the timer end, display the cutscene
 function playScene(timer, scene) {
     if (floor(timer.counter) === 0) {
-        state = scene
+        state = scene;
     }
 }
 
@@ -600,9 +607,17 @@ function mousePressed() {
 
     if (state === "storyCutscene" && showDialogueBox === true) {
         dialogueIndex++;
-        if (dialogueIndex === Dialogue01.length) {
+        if (dialogueIndex === storyDialogue.Scenes[sceneIndex].Dialogue.length) {
+            sceneIndex++;
+            if (sceneIndex === storyDialogue.Scenes.length) {
+                // Ran out of story dialogs!
+                console.log("END OF STORY!");
+            }
+            else {
+                dialogueIndex = 0;
+                storyTimer.counter = storyDialogue.Scenes[sceneIndex].Delay;
+            }
             state = "storyMode";
-
         }
     }
 }

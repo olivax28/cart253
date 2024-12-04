@@ -1,18 +1,25 @@
 {
     "Desription": "Dialogue that will appear in the story mode version of Astral projectiles",
-    "Dialogue": [
+    "Scenes": [
         {
-            "storyDialogue01": [
+            "Delay": 5,
+            "Dialogue": [
                 "Pilot: Year is 1989, December 12th. Time is 1 PM.",
                 "...",
                 "Pilot: Surrounded by unknown objects, UFOs.",
                 "Pilot: Commander?",
                 "Oh no."
-            ],
-            "storyDialogue02": [
+            ]
+        },
+        {
+            "Delay": 5,
+            "Dialogue": [
                 "Commander: He won't stop."
-            ],
-            "storyDialogue03": [
+            ]
+        },
+        {
+            "Delay": 2,
+            "Dialogue": [
                 "Commander:...",
                 "Commander: Goodbye."
             ]
