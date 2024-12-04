@@ -28,7 +28,14 @@
         {
             "Delay": 2.5,
             "Dialogue": [
-                "Pilot: Commander? Hello? What do you mean?"
+                "Pilot: Commander? Hello? What do you mean?",
+                "There's too many I need backup!"
+            ]
+        },
+        {
+            "Delay": 5,
+            "Dialogue": [
+                "From the unending darkness of space a soul cannot return home."
             ]
         }
     ]

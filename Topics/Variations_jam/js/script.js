@@ -579,6 +579,7 @@ function mousePressed() {
         dialogueIndex++;
         if (dialogueIndex === cutsceneText.length) {
             // returns player to the title screen at the end of the play game dialogue array
+            dialogueIndex = 0;
             state = "title";
         }
     }
