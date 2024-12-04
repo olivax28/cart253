@@ -45,10 +45,11 @@ const cutsceneText = [
     "If only he knew the STORY."
 ]
 
-
+//loads inthe JSON file for the stroy dialogue
 let storyDialogue = undefined;
-
+// goes through the scenes of the JSON file for the story mode dialogue
 let sceneIndex = 0;
+// goes through the array for the Play Game mode and Story dialogue
 let dialogueIndex = 0;
 let showDialogueBox = false;
 
@@ -70,28 +71,17 @@ let healthBar = {
     color: "#ff1b1b"
 }
 
-// the current score and its minimum for resetting purposes
+// the current score, the score is never calculated in the game for actual points, so there is no reset
 let score = 0;
-let scoreMin = 0;
-//Timer parameters for the different game timer which call the custscenes\
-// for play game
-let timer01 = {
+
+// timer to call the play game cutscene
+let playCutsceneTimer = {
     counter: 10,
 };
 
+// loads in the timer based on the JSON file
 let storyTimer = {
     counter: undefined
-};
-
-//for story mode
-let timer02 = {
-    counter: 5,
-};
-let timer03 = {
-    counter: 10,
-};
-let timer04 = {
-    counter: 30,
 };
 
 
@@ -146,13 +136,13 @@ const textBoxCutscene = {
 
 }
 
-//strings of text for defender mode
+//strings of text for defender mode that will be displayed under the ship
 
 const defenderString01 = "Pilot: There's no one left";
 
 const defenderString02 = "Pilot: There's nowhere to go.";
 
-//the inifnity symbol which replaced the healthabr in defender moder
+//the inifnity symbol which replaced the healthabr in defender mode
 const infinitySymbol = {
     body: {
         x: 540,
@@ -181,7 +171,7 @@ function preload() {
 function setup() {
     createCanvas(1080, 720);
     setTimeout(addEnemyShip, enemyShipDelay);
-
+    // links the storyTimer object to the JSON file, then directs it to the Delay part of each scene (calls each after the designated delay time)
     storyTimer.counter = storyDialogue.Scenes[sceneIndex].Delay;
 }
 
@@ -198,7 +188,7 @@ function createBullets() {
 }
 
 
-
+// Generates the enemy ships (UFOs) at the top of the screen on a random x coordinate
 function createEnemyShips() {
     let enemyShip = {
         body: {
@@ -242,7 +232,7 @@ function draw() {
     }
 }
 
-
+// The title screen menu with three game modes, Play Game, Story and Defend
 function title() {
     //sets size and alignment of the Title text 
     textSize(32);
@@ -252,7 +242,7 @@ function title() {
     imageMode(CENTER);
     image(titleScreenIMG, width / 2, height / 2);
     pop();
-
+    //"title Boxes" act as hit boxes to detect which one the player wants to choose
     gamePick(titleBoxPlay);
     gamePick(titleBoxDefender);
     gamePick(titleBoxStory);
@@ -270,9 +260,6 @@ function gamePick(titleBox) {
         state = titleBox.state
     }
 }
-
-
-//functions for the title Screen
 
 //The main game mode
 function playGame() {
@@ -292,8 +279,8 @@ function playGame() {
     checkPlayerEnemyOverlap();
     drawScore(score);
     drawHealthBar();
-    countDown(timer01);
-    playScene(timer01, "playGameCutscene");
+    countDown(playCutsceneTimer);
+    playScene(playCutsceneTimer, "playGameCutscene");
 
 }
 
@@ -340,16 +327,13 @@ function storyCutscene() {
     imageMode(CENTER);
     image(cutsceneBG, width / 2, height / 2);
     pop();
-    // const Dialogue01 = storyDialogue.Description;
+    // defines dialogArray as being within the JSON file, indiactes which scene and which line to display
     const dialogArray = storyDialogue.Scenes[sceneIndex].Dialogue;
     checkDialogueTimer("storyCutscene", dialogArray);
-    push();
-    pop();
-
 
 }
 
-
+// The last game mode, the player is alone and a "secret message" can be uncovered by moving the ship up and down and sideways
 function defenderMode() {
     background("black");
     for (let bullet of bullets) {
@@ -378,7 +362,7 @@ function movePlayer() {
 }
 
 
-// moves the player ship in the defender version, moved using up and downa rrow keys on x and y axis
+// moves the player ship in the defender version, moved using up and down arrow keys on x and y axis
 function movePlayerDefender() {
     if (keyIsDown(LEFT_ARROW)) {
         playerShip.body.x -= playerShip.body.velocity;
@@ -396,7 +380,7 @@ function movePlayerDefender() {
 
 
 //the text that is hidden under the ship in defender mode, mapped to the x and Y placement of the ship, Wasn't originally going to keep them overlapping, but I kind of like that "there's nowhere to go" is harder to decipher
-//messagesa re revealed at top of the canvas and at bottom left
+//messagesa are revealed at top of the canvas and at bottom left
 function drawDefenderText(shipCoord, string) {
     let defenderfill = map(shipCoord, 500, 0, 0, 255);
     push();
@@ -419,7 +403,7 @@ function countDown(timer) {
 
 }
 
-//determines when the timer end, display the cutscene
+//determines when the timer end, displays the cutscene dsignated scene
 function playScene(timer, scene) {
     if (floor(timer.counter) === 0) {
         state = scene;
@@ -439,7 +423,7 @@ function checkBulletEnemyOverlap() {
             if (enemyHit) {
                 // increase the score
                 score = score + 1;
-                //makes the ship disappear
+                //makes the enemy ship disappear
                 const index = enemyShips.indexOf(enemyShip);
                 enemyShips.splice(index, 1);
             }
@@ -459,7 +443,9 @@ function checkPlayerEnemyOverlap() {
         if (playerHit) {
             // increase the score
             healthBar.healthlvlWidth -= 10;
+            // constrains enemy ship
             healthBar.healthlvlWidth = constrain(healthBar.healthlvlWidth, 0, healthBar.healthlvlWidth);
+            //removes the hit UFO from the enemy ship array
             const index = enemyShips.indexOf(enemyShip);
             enemyShips.splice(index, 1);
         }
@@ -469,12 +455,12 @@ function checkPlayerEnemyOverlap() {
 
 }
 
-// move the enemy ships
+// move the enemy UFO
 function moveEnemyShip(enemyShip) {
     enemyShip.body.y += enemyShip.body.velocity
 }
 
-// responsible for drawing all the elements that have sprites
+// responsible for drawing all the elements that have sprites 
 function drawSpriteElements(spriteObject) {
     push();
     imageMode(CENTER);
@@ -482,13 +468,6 @@ function drawSpriteElements(spriteObject) {
     pop();
 }
 
-//draws the UFOa
-function drawEnemyShip(enemyShip) {
-    push();
-    fill(enemyShip.body.fill)
-    ellipse(enemyShip.body.x, enemyShip.body.y, enemyShip.body.size);
-    pop();
-}
 /// displays the score in top right 
 function drawScore(scoreText) {
     push();
@@ -574,6 +553,7 @@ function drawTextBox(textBox, textArray) {
     textSize(20);
     textAlign(LEFT);
     textFont('Courier New');
+    //plug in wanted text here!
     text(textArray[dialogueIndex], textBox.body.x + 5, textBox.body.y + 5, textBox.body.w, textBox.body.h)
     pop();
 }
@@ -595,29 +575,32 @@ function showTheTextBox() {
     showDialogueBox = true;
 }
 
-//cycle through the text box array (among other things)
+//Allows the player to click through the two custscene dialogues, play game and story mode
 function mousePressed() {
+    // for the play game version
     if (state === "playGameCutscene" && showDialogueBox === true) {
         dialogueIndex++;
         if (dialogueIndex === cutsceneText.length) {
+            // returns player to the title screen at the end of the play game dialogue array
             state = "title";
-            console.log(state)
         }
     }
-
+    // for the story mode cutscenes
     if (state === "storyCutscene" && showDialogueBox === true) {
         dialogueIndex++;
+        // returns the Dialogue JSON path, selects the scene from the array, then the dialogue of that scene
         if (dialogueIndex === storyDialogue.Scenes[sceneIndex].Dialogue.length) {
             sceneIndex++;
             if (sceneIndex === storyDialogue.Scenes.length) {
-                // Ran out of story dialogs!
-                console.log("END OF STORY!");
+                // at the end of all dialogue, return to the title screen
+                state = "title";
+                console.log(state);
             }
             else {
                 dialogueIndex = 0;
                 storyTimer.counter = storyDialogue.Scenes[sceneIndex].Delay;
+                state = "storyMode";
             }
-            state = "storyMode";
         }
     }
 }
