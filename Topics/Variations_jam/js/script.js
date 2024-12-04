@@ -286,7 +286,6 @@ function playGame() {
 
 //the Cutscene which interrupts the "playGame" mode
 function playGameCutscene() {
-    background("#ff0000");
     push();
     imageMode(CENTER);
     image(cutsceneBG, width / 2, height / 2);
@@ -297,7 +296,7 @@ function playGameCutscene() {
 //Story Mode of the Game
 
 function storyMode() {
-    background("#214222");
+    background("#1c022b");
     // bullet for loop
     for (let bullet of bullets) {
         moveBullet(bullet);
@@ -322,7 +321,6 @@ function storyMode() {
 
 //the Cutscene which interrupts the "playGame" mode
 function storyCutscene() {
-    background("#ff0000");
     push();
     imageMode(CENTER);
     image(cutsceneBG, width / 2, height / 2);
@@ -592,10 +590,11 @@ function mousePressed() {
         if (dialogueIndex === storyDialogue.Scenes[sceneIndex].Dialogue.length) {
             sceneIndex++;
             if (sceneIndex === storyDialogue.Scenes.length) {
-                // at the end of all dialogue, return to the title screen
+                // at the end of all scenes, return to the title screen
                 state = "title";
             }
             else {
+                // if not at the end of the scenes, return to the game
                 dialogueIndex = 0;
                 storyTimer.counter = storyDialogue.Scenes[sceneIndex].Delay;
                 state = "storyMode";
