@@ -35,11 +35,14 @@ let cutsceneBG = undefined;
 let titleScreenIMG = undefined;
 
 const cutsceneText = [
+    "Pilot: Uh. Oh no.",
+    "Pilot: Commander, are you in?",
+    "Pilot: My engine's gone, I need someone to come in and get me outta here. Over",
     "Pilot: Commander, are you there? Over.",
     "...",
     "Pilot: Is anyone out there?",
     "The vast expanse of Space extended before him, empty and cold.",
-    "If only he'd have known the STORY."
+    "If only he knew the STORY."
 ]
 
 
@@ -237,12 +240,6 @@ function title() {
     image(titleScreenIMG, width / 2, height / 2);
     pop();
 
-    // drawTitleBoxes(titleBoxPlay);
-
-    // drawTitleBoxes(titleBoxStory);
-
-    // drawTitleBoxes(titleBoxDefender);
-
     gamePick(titleBoxPlay);
     gamePick(titleBoxDefender);
     gamePick(titleBoxStory);
@@ -263,14 +260,6 @@ function gamePick(titleBox) {
 
 
 //functions for the title Screen
-
-// function drawTitleBoxes(titleBox) {
-//     push();
-//     noStroke();
-//     fill(titleBox.fill);
-//     rect(titleBox.x, titleBox.y, titleBox.w, titleBox.h);
-//     pop();
-// }
 
 //The main game mode
 function playGame() {
