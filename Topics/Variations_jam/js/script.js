@@ -1,16 +1,22 @@
 /**
  * Astral Projectiles
  * Olivia Axiuk
- notes:
- have timer in main game that leads to a screen (before health bar is dead)
- alien character dialogu, brings back to menu - cannot enter PLAy version of te game again (do not reset the timer)
- other two versions:
- story mode (interrupting story)
- Defender Mode (play as an alien)
+ * Play Game first! 
+ * A relatively normal experience. Control the ship with left and right arrow keys, spacebar to shoot
+ *  until the the timer ends and the "cutscene" plays, cycle through the dialogue with mouse click until the player is brought back to the title screen
+ * Story Mode!
+ * doesn't let the player actually pay for very long, it interrupts the player mutliple times with dialogue
+ * same controls as play game. The longer you take to read the more UFOs there will be
+ * Send player back to title screen.
+ * Defend!
+ * Control the ship with right, left AND up and down keys.
+ * Try to find the secret messages (top and bottom left), the bottom left will be harder to read.
  */
 
 "use strict";
 
+
+// the player ship has starting x and Y coordinates and appears at the bottom of the screen
 const playerShip = {
     body: {
         x: 540,
@@ -152,6 +158,9 @@ const infinitySymbol = {
 
 }
 
+//sound FX
+let shootSound = undefined
+
 
 //load in all sprites
 function preload() {
@@ -162,6 +171,8 @@ function preload() {
     cutsceneBG = loadImage("assets/images/cutsceneBG.PNG")
     infinitySymbol.body.sprite = loadImage("assets/images/infinity.PNG")
     titleScreenIMG = loadImage("assets/images/titleScreen.PNG")
+    soundFormats("mp3");
+    shootSound = loadSound("assets/sounds/8bit_shoot.mp3");
 }
 
 
@@ -491,6 +502,8 @@ function drawHealthBar() {
 function keyPressed() {
     if (keyCode === 32) {
         bullets.push(createBullets())
+        shootSound.play();
+
 
     }
 }
