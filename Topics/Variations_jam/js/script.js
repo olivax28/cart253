@@ -5,12 +5,13 @@
  * A relatively normal experience. Control the ship with left and right arrow keys, spacebar to shoot
  *  until the the timer ends and the "cutscene" plays, cycle through the dialogue with mouse click until the player is brought back to the title screen
  * Story Mode!
- * doesn't let the player actually pay for very long, it interrupts the player mutliple times with dialogue
+ * doesn't let the player actually play for very long, it interrupts the player mutliple times with dialogue
  * same controls as play game. The longer you take to read the more UFOs there will be
  * Send player back to title screen.
  * Defend!
  * Control the ship with right, left AND up and down keys.
  * Try to find the secret messages (top and bottom left), the bottom left will be harder to read.
+ * NOTE During cutscenes click WITHIN the textbox to avoid accidentally getting send over to the next version.
  */
 
 "use strict";
@@ -34,7 +35,7 @@ let bullets = [];
 let enemyShips = [];
 let enemySprite = undefined;
 
-//the background image sprite for the cutscene
+//the background image for the cutscenes
 let cutsceneBG = undefined;
 
 //The titlescreen image
@@ -262,13 +263,15 @@ function title() {
 
 // detects the overlap of the mouse over the title box 
 function gamePick(titleBox) {
-    const mouseGameModeOverlap = mouseX > titleBox.x &&
-        mouseX < titleBox.x + titleBox.w &&
-        mouseY > titleBox.y &&
-        mouseY < titleBox.y + titleBox.h;
+    if (state === "title") {
+        const mouseGameModeOverlap = mouseX > titleBox.x &&
+            mouseX < titleBox.x + titleBox.w &&
+            mouseY > titleBox.y &&
+            mouseY < titleBox.y + titleBox.h;
 
-    if (mouseGameModeOverlap && mouseIsPressed) {
-        state = titleBox.state
+        if (mouseGameModeOverlap && mouseIsPressed) {
+            state = titleBox.state
+        }
     }
 }
 
