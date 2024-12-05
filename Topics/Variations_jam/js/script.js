@@ -166,12 +166,12 @@ let shootSound = undefined
 //load in all sprites
 function preload() {
     //load story mode dialogue data
-    storyDialogue = loadJSON("assets/data/dialogue.JSON")
-    playerShip.body.sprite = loadImage("assets/images/playerShip.png")
-    enemySprite = loadImage("assets/images/enemyShip.png")
-    cutsceneBG = loadImage("assets/images/cutsceneBG.PNG")
-    infinitySymbol.body.sprite = loadImage("assets/images/infinity.png")
-    titleScreenIMG = loadImage("assets/images/titleScreen.png")
+    storyDialogue = loadJSON("assets/data/dialogue.JSON");
+    playerShip.body.sprite = loadImage("assets/images/playerShip.png");
+    enemySprite = loadImage("assets/images/enemyShip.png");
+    cutsceneBG = loadImage("assets/images/cutsceneBG.PNG");
+    infinitySymbol.body.sprite = loadImage("assets/images/infinity.png");
+    titleScreenIMG = loadImage("assets/images/titleScreen.png");
     soundFormats("mp3");
     shootSound = loadSound("assets/sounds/8bit_shoot.mp3");
 }
