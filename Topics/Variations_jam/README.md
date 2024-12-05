@@ -2,7 +2,7 @@
 
 Author Name
 
-[View this project online](URL_FOR_THE_RUNNING_PROJECT)
+[View this project online]https://olivax28.github.io/cart253/Topics/Variations_jam/
 
 ## Description
 
@@ -17,7 +17,7 @@ Author Name
  * Defend!
  * Control the ship with right, left AND up and down keys.
  * Try to find the secret messages (top and bottom left), the bottom left will be harder to read.
- * NOTE During cutscenes click WITHIN the textbox to avoid accidentally getting send over to the next version.
+ * NOTE During cutscenes click WITHIN the textbox to avoid accidentally getting sent over to the next version.
  
 
 ## Credits
