@@ -166,7 +166,7 @@ let shootSound = undefined
 //load in all sprites
 function preload() {
     //load story mode dialogue data
-    storyDialogue = loadJSON("assets/data/dialogue.JSON");
+    storyDialogue = loadJSON("assets/data/dialogue.json");
     playerShip.body.sprite = loadImage("assets/images/playerShip.png");
     enemySprite = loadImage("assets/images/enemyShip.png");
     cutsceneBG = loadImage("assets/images/cutsceneBG.PNG");
