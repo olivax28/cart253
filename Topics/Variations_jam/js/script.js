@@ -93,7 +93,7 @@ let storyTimer = {
     counter: undefined
 };
 
-
+// the hit boxes for the title screen
 const titleBoxPlay = {
     x: 300,
     y: 100,
@@ -184,6 +184,7 @@ function preload() {
 */
 function setup() {
     createCanvas(1080, 720);
+    // delays the appaerance of the enemy ships
     setTimeout(addEnemyShip, enemyShipDelay);
     // links the storyTimer object to the JSON file, then directs it to the Delay part of each scene (calls each after the designated delay time)
     storyTimer.counter = storyDialogue.Scenes[sceneIndex].Delay;
@@ -550,7 +551,7 @@ function destroyBullet() {
     }
 }
 
-//For the PlayGame cutscene texts
+//For the cutscene texts
 //Functions draws the text boxes
 function drawTextBox(textBox, textArray) {
     //border
